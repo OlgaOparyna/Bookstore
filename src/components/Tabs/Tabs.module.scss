@@ -1,0 +1,27 @@
+@import "src/assets/colors";
+
+.container{
+  display: flex;
+  width: 544px;
+  border-bottom: 1px solid $gray;
+}
+.tab{
+  padding: 26px 83px 20px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  color: $secondary;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  letter-spacing: 0.05em;
+  &:hover{
+    color: $primary;
+    cursor: pointer;
+  }
+}
+.activeTab{
+  color: $primary;
+  border-bottom: 2px solid $primary;
+}
