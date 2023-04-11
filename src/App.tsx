@@ -1,24 +1,15 @@
 import React, {useState} from 'react';
-import Tabs from "./components/Tabs";
-import {TabsNames, TabsProps} from "./components/Tabs/types";
+import Input from "./components/Input";
 function App() {
-    const [activeTab, setActiveTab] = useState(TabsNames.SIGNIN);
-    const onTabClick = (key: TabsNames) => () => {
-        setActiveTab(key);
-    };
-    const TABS_LIST =  [
-            {
-                title: "SIGN IN",
-                key: TabsNames.SIGNIN,
-            },
-            {
-                title: "SIGN UP",
-                key: TabsNames.SIGNUP,
-            },
-        ]
+
   return (
     <div className="App">
-      <Tabs tabsListArray={TABS_LIST} activeTab={activeTab} onClick={onTabClick}/>
+<Input value={'Placeholder'} onChange={()=>{}} placeholder={'Placeholder'}/>
+<Input value={'Placeholder'} onChange={()=>{}} placeholder={'Placeholder'} errorText={'error'}/>
+
+        <Input value={"text"} onChange={()=>{}} title="Title" placeholder="Placeholder"/>
+        <Input value={"text"} onChange={()=>{}} title="Title" placeholder="Placeholder" disabled/>
+        <Input value={"text"} onChange={()=>{}} title="Title" placeholder="Placeholder" errorText ={"Error text"} />
     </div>
   );
 }

@@ -1,0 +1,46 @@
+@import "src/assets/colors";
+
+.title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: $secondary;
+  margin-bottom: 8px;
+  display: block;
+  padding-top: 40px;
+}
+.input {
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $secondary;
+  padding: 14px 20px 10px;
+  width: 480px;
+  box-sizing: border-box;
+  border: 1px solid $gray;
+  margin: 4px;
+  &:focus,
+  &hover {
+    border: 2px solid $gray;
+  }
+  &:active {
+    border: 1px solid $gray;
+  }
+}
+.disabledInput {
+  background: $gray;
+  border: 1px solid $gray;
+  cursor: not-allowed;
+}
+.errorInput {
+  border: 1px solid $red;
+}
+.errorText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  margin-left: 4px;
+  color: $red;
+}
+
