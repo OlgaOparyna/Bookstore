@@ -1,10 +1,9 @@
 import React from 'react';
-import Button from "./components/Button";
+import Title from "./components/Title";
 function App() {
   return (
     <div className="App">
-      <Button title={"Add to cart"} onClick={()=>{}}/>
-      <Button title={"disabled"} onClick={()=>{}} disabled/>
+      <Title title={"New Releases Books"}/>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+@import "src/assets/colors";
+
+.title {
+  color: $primary;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+  margin-bottom: 48px;
+}
