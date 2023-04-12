@@ -1,5 +1,6 @@
 import React from "react";
 import CardList from "./components/CardList";
+import Page404 from "src/pages/Page404";
 
 const MOCK_ARRAY =   [    {
         title: "Designing Across Senses",
@@ -101,7 +102,7 @@ const MOCK_ARRAY =   [    {
 function App() {
   return (
     <div className="App">
-      <CardList cardsList={MOCK_ARRAY}/>
+      <Page404/>
     </div>
   );
 }
