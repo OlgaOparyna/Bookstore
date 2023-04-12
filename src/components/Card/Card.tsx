@@ -2,7 +2,8 @@ import React, { FC } from "react";
 import classNames from "classnames";
 
 import styles from "./Card.module.scss";
-import { CardColor, CardProps } from "./types";
+import { CardProps } from "./types";
+import {CardColor} from "src/utils/@globalTypes";
 
 const Card: FC<CardProps> = ({ card, color }) => {
   const { title, subtitle, isbn13, price, image, url } = card;

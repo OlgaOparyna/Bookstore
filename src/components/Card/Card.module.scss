@@ -1,25 +1,36 @@
 @import "src/assets/colors";
 
-.container{
-    display: flex;
-    flex-direction: column;
-    max-width: 352px;
-    height: 454px;
-    box-sizing: border-box;
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 352px;
+  height: 454px;
+  box-sizing: border-box;
 }
-.imageContainer{
+.imageContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $purple;
   height: 264px;
 }
-.image{
-    width: 186px;
-    height: 224px;
-    object-fit: cover;
+.blueImageContainer {
+  background-color: $blue;
 }
-.infoContainer{
+.greenImageContainer {
+  background-color: $green;
+}
+.orangeImageContainer {
+  background-color: $orange;
+}
+.purpleImageContainer {
+  background-color: $purple;
+}
+.image {
+  width: 186px;
+  height: 224px;
+  object-fit: cover;
+}
+.infoContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -39,17 +50,17 @@
     color: $primary-secondary;
   }
 }
-.subtitle{
+.subtitle {
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
+  height: 48px;
   color: $secondary;
-  margin-top: 8px;
+  margin: 8px 0 16px;
 }
-.price{
+.price {
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
   color: $primary;
-  margin-top: 40px;
 }
