@@ -23,25 +23,26 @@ const Header = () => {
         <Button
           title={<SearchIcon />}
           onClick={() => {}}
-          className={styles.inputButton}
+          butonClassName={styles.inputButton}
         />
       </div>
       <div className={styles.buttonContainer}>
         <Button
           title={<HeartIcon />}
           onClick={() => {}}
-          className={styles.button}
+          butonClassName={styles.button}
         />
         <Button
           title={<BasketIcon />}
           onClick={() => {}}
-          className={styles.button}
+          butonClassName={styles.button}
         />
         <Button
           title={<UserIcon />}
           onClick={() => {}}
-          className={styles.button}
+          butonClassName={styles.button}
         />
+      {/*    TODO style button*/}
       </div>
     </div>
    );

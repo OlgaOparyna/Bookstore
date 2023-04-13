@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PagesContainer from "src/pages/PagesContainer";
 import Page404 from "src/pages/Page404";
 import ResetPassword from "src/pages/ResetPassword/ResetPassword";
+import NewPassword from "src/pages/NewPassword/NewPassword";
 
 export enum RoutesList {
     Home = "/",
@@ -36,7 +37,7 @@ const Router = () => {
                         element={"FavoritesBooks"}
                     />
                     <Route path={RoutesList.ResetPassword} element={<ResetPassword/>} />
-                    <Route path={RoutesList.NewPassword} element={"NewPassword"} />
+                    <Route path={RoutesList.NewPassword} element={<NewPassword/>} />
                     <Route path={RoutesList.Default} element={<Page404 />} />
                 </Route>
             </Routes>

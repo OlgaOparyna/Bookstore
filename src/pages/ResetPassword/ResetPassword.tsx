@@ -28,8 +28,9 @@ const ResetPassword = () => {
       <div className={styles.wrapper}>
         {isSubmitted ? (
           <div className={styles.message}>
-            You will receive an email <span className={styles.email}>{email}</span> with a link to reset your
-            password!
+            You will receive an email{" "}
+            <span className={styles.email}>{email}</span> with a link to reset
+            your password!
           </div>
         ) : null}
         <div className={styles.inputContainer}>
@@ -44,6 +45,7 @@ const ResetPassword = () => {
           <div className={styles.button}>
             <Button title={"Reset"} onClick={onSubmit} />
           </div>
+        {/* TODO кнопка при submit  */}
         </div>
       </div>
     </div>
