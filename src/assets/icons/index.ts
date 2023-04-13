@@ -1,1 +1,5 @@
 export {NoContentIcon} from "./NoContentIcon"
+export {BasketIcon} from "./BasketIcon"
+export {HeartIcon} from "./HeartIcon"
+export {SearchIcon} from "./SearchIcon"
+export {UserIcon} from "./UserIcon"

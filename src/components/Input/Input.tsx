@@ -4,6 +4,7 @@ import styles from "./Input.module.scss";
 
 type InputProps = {
     title?: string;
+    titleClassName?: string;
     value: string;
     onChange: (value: string) => void;
     placeholder: string;
@@ -16,6 +17,7 @@ type InputProps = {
 };
 const Input: FC<InputProps> = ({
                                    title,
+                                   titleClassName,
                                    value,
                                    onChange,
                                    type,
@@ -30,8 +32,8 @@ const Input: FC<InputProps> = ({
         onChange(e.target.value);
     };
     return (
-        <div>
-            {title && <label className={styles.title}>{title}</label>}
+        <div className={styles.container}>
+            {title && <label className={classNames(styles.title, titleClassName)}>{title}</label>}
             <input
                 value={value}
                 className={classNames(styles.input, inputClassName, {
