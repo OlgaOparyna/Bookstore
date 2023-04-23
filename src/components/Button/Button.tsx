@@ -7,15 +7,18 @@ type ButtonProps = {
   title: string | ReactNode;
   onClick: () => void;
   disabled?: boolean;
-  butonClassName?: string;
+  buttonClassName?: string;
 };
-const Button: FC<ButtonProps> = ({ title, onClick, disabled, butonClassName }) => {
+const Button: FC<ButtonProps> = ({
+  title,
+  onClick,
+  disabled,
+  buttonClassName,
+}) => {
   return (
     <div
       onClick={disabled ? undefined : onClick}
-      className={classNames(
-          styles.primaryButton,
-          butonClassName, {
+      className={classNames(styles.primaryButton, buttonClassName, {
         [styles.disabledButton]: disabled,
       })}
     >

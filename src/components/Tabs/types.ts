@@ -1,6 +1,9 @@
 export enum TabsNames {
     SIGNIN,
     SIGNUP,
+    Description,
+    Authors,
+    Reviews
 }
 export type TabsProps = {
     tabsListArray: TabsType[];

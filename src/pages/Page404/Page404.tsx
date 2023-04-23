@@ -1,9 +1,9 @@
 import React from "react"
-
 import { useNavigate } from "react-router-dom";
-import styles from "./Page404.module.scss"
-import Button from "../../components/Button";
+
+import Button from "src/components/Button";
 import {RoutesList} from "src/pages/Router";
+import styles from "./Page404.module.scss"
 const Page404 = () => {
     const navigate = useNavigate()
     const onBtnClick = ()=>{

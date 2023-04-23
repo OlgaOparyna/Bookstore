@@ -1,0 +1,37 @@
+@import "src/assets/colors";
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: $purple;
+  width: 1120px;
+}
+.infoContainer {
+  padding: 56px 64px;
+}
+.title {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+  color: $primary;
+  text-transform: uppercase;
+}
+.text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: $secondary;
+}
+.inputContainer {
+  display: flex;
+  margin: 60px 0 0 -32px;
+}
+.input {
+  width: 812px;
+  height: 56px;
+}
+.button {
+  margin-left: -40px;
+  height: 56px;
+  font-size: 18px;
+  padding: 16px 40px;
+}

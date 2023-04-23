@@ -1,16 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import styles from "./Header.module.scss";
+import { RoutesList } from "src/pages/Router";
 import { Bookstore } from "src/assets/logoBookstore";
 import Input from "src/components/Input";
-import Button from "src/components/Button";
 import { BasketIcon, HeartIcon, SearchIcon, UserIcon } from "src/assets/icons";
-import classNames from "classnames";
+import styles from "./Header.module.scss";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const onLogoClick = () => {
+    navigate(RoutesList.Home);
+  };
   return (
     <div className={styles.container}>
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={onLogoClick}>
         <Bookstore />
       </div>
       <div className={styles.searchContainer}>
@@ -20,31 +24,23 @@ const Header = () => {
           placeholder="Search"
           inputClassName={styles.input}
         />
-        <Button
-          title={<SearchIcon />}
-          onClick={() => {}}
-          butonClassName={styles.inputButton}
-        />
+        <div className={styles.searchIcon}>
+          <SearchIcon />
+        </div>
       </div>
-      <div className={styles.buttonContainer}>
-        <Button
-          title={<HeartIcon />}
-          onClick={() => {}}
-          butonClassName={styles.button}
-        />
-        <Button
-          title={<BasketIcon />}
-          onClick={() => {}}
-          butonClassName={styles.button}
-        />
-        <Button
-          title={<UserIcon />}
-          onClick={() => {}}
-          butonClassName={styles.button}
-        />
-      {/*    TODO style button*/}
+      <div className={styles.iconContainer}>
+        <div className={styles.icon}>
+          <HeartIcon />
+        </div>
+        <div className={styles.icon}>
+          <BasketIcon />
+        </div>
+        <div className={styles.icon}>
+          <UserIcon />
+        </div>
+        {/*    TODO style search, search*/}
       </div>
     </div>
-   );
+  );
 };
 export default Header;

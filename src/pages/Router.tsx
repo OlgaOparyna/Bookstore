@@ -4,6 +4,10 @@ import PagesContainer from "src/pages/PagesContainer";
 import Page404 from "src/pages/Page404";
 import ResetPassword from "src/pages/ResetPassword/ResetPassword";
 import NewPassword from "src/pages/NewPassword/NewPassword";
+import SignIn from "src/pages/SingIn";
+import SignUp from "src/pages/SignUp";
+import Book from "src/pages/Book";
+import Home from "src/pages/Home";
 
 export enum RoutesList {
     Home = "/",
@@ -23,15 +27,15 @@ const Router = () => {
         <BrowserRouter>
             <Routes>
                 <Route path={RoutesList.Home} element={<PagesContainer />}>
-                    <Route path={RoutesList.Home} element={"Home"} />
+                    <Route path={RoutesList.Home} element={<Home/>} />
                     <Route path={RoutesList.Search} element={"Search"} />
                     <Route
                         path={RoutesList.Account}
                         element={"Account"} />
-                    <Route path={RoutesList.Book} element={"Book"} />
+                    <Route path={RoutesList.Book} element={<Book/>} />
                     <Route path={RoutesList.Basket} element={"Basket"} />
-                    <Route path={RoutesList.SignIn} element={"SignIn"} />
-                    <Route path={RoutesList.SignUp} element={"SignUp"} />
+                    <Route path={RoutesList.SignIn} element={<SignIn/>} />
+                    <Route path={RoutesList.SignUp} element={<SignUp/>} />
                     <Route
                         path={RoutesList.FavoritesBooks}
                         element={"FavoritesBooks"}

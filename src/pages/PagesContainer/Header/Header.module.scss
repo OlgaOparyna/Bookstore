@@ -20,12 +20,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid $gray;
+  min-height: 56px;
+  width: 542px;
+  box-sizing: border-box;
 }
 .input {
-  min-height: 56px;
   width: 486px;
-  flex: 1;
-  margin: 0;
+  border: none;
   &::placeholder {
     font-weight: 400;
     font-size: 16px;
@@ -33,19 +35,18 @@
     color: $secondary;
   }
 }
-.inputButton {
-  height: 56px;
-  width: 56px;
-  margin: 0;
-  padding: 0;
-  background-color: $white;
+.searchIcon {
+  padding: 16px;
 }
-.buttonContainer {
+.iconContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  div:hover {
+    cursor: pointer;
+    svg > path {
+      fill: $primary-secondary;
+    }
+  }
 }
-.button {
-  height: 56px;
-  width: 56px;
+.icon {
+padding: 16px;
 }
