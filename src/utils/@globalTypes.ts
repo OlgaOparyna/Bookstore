@@ -6,10 +6,7 @@ export type CardType ={
     image: string,
     url: string,
 }
-export enum CardColor {
-    Blue,
-    Green,
-    Orange,
-    Purple
+export type CardProps = {
+    card: CardType,
 }
 export type CardListType = CardType[]
