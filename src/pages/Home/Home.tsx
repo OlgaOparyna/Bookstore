@@ -8,18 +8,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {BookSelectors, getAllBooks} from "src/redux/reducers/bookSlice";
 
 const Home = ()=>{
-    const [currentPage, setCurrentPage] = useState(1);
-    const [ordering, setOrdering] = useState("");
     const dispatch = useDispatch();
     useEffect(() => {
-        const offset = 12 * (currentPage - 1);
-        dispatch(getAllBooks({ offset, ordering }));
-    }, [currentPage, ordering]);
+    dispatch(getAllBooks())
+}, []);
 
-    const bookList = useSelector(BookSelectors.getAllBooks);
+    const booksList = useSelector(BookSelectors.getAllBooks);
 
     return <div>
-               <CardList cardsList={bookList}/>
+               <CardList cardsList={booksList}/>
     </div>
 }
 

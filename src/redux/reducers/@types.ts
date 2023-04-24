@@ -3,7 +3,6 @@ import { CardListType } from "src/utils/@globalTypes";
 export type GetAllBooksPayload = {
     offset: number;
     search?: string;
-    ordering?: string;
 };
 export interface SetAllBooksPayload {
     cardList: CardListType;

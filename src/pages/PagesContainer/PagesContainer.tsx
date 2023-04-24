@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./PagesContainer.module.scss";
 import Header from "./Header";
-import CardList from "src/components/CardList";
 import {Outlet} from "react-router-dom";
 
 const PagesContainer = () => {

@@ -14,11 +14,11 @@ type initialType = {
     isVisibleSelectedModal: boolean;
     likeBooks: CardListType;
     savedBooks: CardListType;
-    BooksList: CardListType;
+   booksList: CardListType;
     singleBook: CardType | null;
     searchedBooks: CardListType;
     searchValue: string;
-    BooksCount: number;
+    booksCount: number;
     searchedBooksCount: number;
     isAllBooksLoading: boolean;
 };
@@ -30,11 +30,11 @@ const initialState: initialType = {
     isVisibleSelectedModal: false,
     likeBooks: [],
     savedBooks: [],
-    BooksList: [],
+    booksList: [],
     singleBook: null,
     searchedBooks: [],
     searchValue: "",
-    BooksCount: 0,
+    booksCount: 0,
     searchedBooksCount: 0,
     isAllBooksLoading: false,
 };
@@ -43,14 +43,18 @@ const bookSlice = createSlice({
     name: "book",
     initialState,
     reducers: {
-        getAllBooks: (_, __: PayloadAction<GetAllBooksPayload>) => {},
-        setAllBooks: (
-            state,
-            { payload: { BooksCount, cardList } }: PayloadAction<SetAllBooksPayload>
-        ) => {
-            state.BooksList = cardList;
-            state.BooksCount = BooksCount;
-        },
+        getAllBooks: (_, __: PayloadAction<undefined>) => {},
+        setAllBooks: (state, action: PayloadAction<CardType[]>) => {
+                state.booksList = action.payload;
+            },
+        // getAllBooks: (_, __: PayloadAction<GetAllBooksPayload>) => {},
+        // setAllBooks: (
+        //     state,
+        //     { payload: { BooksCount, cardList } }: PayloadAction<SetAllBooksPayload>
+        // ) => {
+        //     state.BooksList = cardList;
+        //     state.BooksCount = BooksCount;
+        // },
         getSingleBook: (_, __: PayloadAction<string>) => {},
         setSingleBook: (state, action: PayloadAction<CardType>) => {
             state.singleBook = action.payload;
@@ -136,11 +140,11 @@ export const BookSelectors = {
         state.book.isVisibleSelectedModal,
     getLikeBooks: (state: RootState) => state.book.likeBooks,
     getSavedBooks: (state: RootState) => state.book.savedBooks,
-    getAllBooks: (state: RootState) => state.book.BooksList,
+    getAllBooks: (state: RootState) => state.book.booksList,
     getSingleBook: (state: RootState) => state.book.singleBook,
     getSearchedBooks: (state: RootState) => state.book.searchedBooks,
     getSearchValue: (state: RootState) => state.book.searchValue,
-    getAllBooksCount: (state: RootState) => state.book.BooksCount,
+    getAllBooksCount: (state: RootState) => state.book.booksCount,
     getAllBooksLoading: (state: RootState) => state.book.isAllBooksLoading,
     getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
 };
