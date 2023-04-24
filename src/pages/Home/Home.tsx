@@ -3,6 +3,7 @@ import Title from "src/components/Title";
 import CardList from "src/components/CardList";
 import Subscribe from "src/components/Subscribe";
 import Account from "src/pages/Account";
+import SearchCardList from "src/components/SearchCardList";
 
 const Home = ()=>{
     const MOCK_ARRAY =   [    {
@@ -34,7 +35,7 @@ const Home = ()=>{
         {/*<Title title="New Releases Books"/>*/}
         {/*<CardList cardsList={MOCK_ARRAY}/>*/}
         {/*<Subscribe/>*/}
-        <Account/>
+        <SearchCardList cardsList={MOCK_ARRAY}/>
     </div>
 }
 

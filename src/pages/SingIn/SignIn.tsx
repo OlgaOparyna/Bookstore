@@ -5,6 +5,8 @@ import Button from "src/components/Button";
 import styles from "./SignIn.module.scss";
 import Tabs from "src/components/Tabs";
 import {TabsNames} from "src/components/Tabs/types";
+import {RoutesList} from "src/pages/Router";
+import {useNavigate} from "react-router-dom";
 
 const SignIn= () => {
     const [email, setEmail] = useState("");
@@ -23,6 +25,17 @@ const SignIn= () => {
             key: TabsNames.SIGNUP,
         },
     ]
+    const navigate = useNavigate()
+    const getCurrentList = () => {
+        switch (activeTab) {
+            case TabsNames.SIGNIN:
+                return navigate(RoutesList.SignIn);
+            case TabsNames.SIGNUP:
+                return navigate(RoutesList.SignUp);
+            default:
+                return navigate(RoutesList.SignIn);
+        }
+    };
     const onChangeEmail = (value: string) => {
         setEmail(value);
     };
