@@ -1,23 +1,22 @@
-import React, {useEffect, useState} from 'react'
-import Title from "src/components/Title";
+import React, { useEffect } from "react";
 import CardList from "src/components/CardList";
+import { useDispatch, useSelector } from "react-redux";
+import { BookSelectors, getAllBooks } from "src/redux/reducers/bookSlice";
 import Subscribe from "src/components/Subscribe";
-import Account from "src/pages/Account";
-import SearchCardList from "src/components/SearchCardList";
-import {useDispatch, useSelector} from "react-redux";
-import {BookSelectors, getAllBooks} from "src/redux/reducers/bookSlice";
 
-const Home = ()=>{
-    const dispatch = useDispatch();
-    useEffect(() => {
-    dispatch(getAllBooks())
-}, []);
+const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllBooks());
+  }, []);
 
-    const booksList = useSelector(BookSelectors.getAllBooks);
-
-    return <div>
-               <CardList cardsList={booksList}/>
+  const booksList = useSelector(BookSelectors.getAllBooks);
+  return (
+    <div>
+      <CardList cardsList={booksList} />
+      <Subscribe/>
     </div>
-}
+  );
+};
 
-export default Home
+export default Home;

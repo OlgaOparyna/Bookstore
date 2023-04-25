@@ -14,7 +14,7 @@ import {
   UserIcon,
 } from "src/assets/icons";
 import styles from "./Header.module.scss";
-import { getSearchedBooks } from "src/redux/reducers/bookSlice";
+// import { getSearchedBooks } from "src/redux/reducers/bookSlice";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -45,7 +45,7 @@ const Header = () => {
     setHeartOpened(false);
   };
   const onClickSearchButton = () => {
-    dispatch(getSearchedBooks({ searchValue, isOverwrite: true, offset: 0 }));
+    // dispatch(getSearchedBooks({ searchValue, isOverwrite: true, offset: 0 }));
     setSearchValue("");
     navigate(RoutesList.Search);
     setBasketOpened(false);

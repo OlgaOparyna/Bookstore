@@ -8,10 +8,8 @@ import { CardType } from "src/utils/@globalTypes";
 //   GetSearchedBooksPayload,
 // } from "src/redux/reducers/@types";
 import {
-  getAllBooks,
-  setAllBooks,
-  getSingleBook,
-  setSingleBook,
+  getAllBooks, getSingleBook,
+  setAllBooks, setSingleBook,
   // setSearchedBooks,
   // getSearchedBooks,
   // setAllBooksLoading,
@@ -22,7 +20,7 @@ import API from "../api";
 function* getAllBooksWorker() {
   const { ok, data, problem }: ApiResponse<any> = yield call(API.getBooks);
   if (ok) {
-    yield put(setAllBooks(data.results));
+    yield put(setAllBooks(data.books));
   } else {
     console.warn("Error getting all books", problem);
   }
@@ -43,7 +41,6 @@ function* getAllBooksWorker() {
 //     }
 //     yield put(setAllPostsLoading(false));
 // }
-
 function* getSingleBookWorker(action: PayloadAction<string>) {
   const { ok, data, problem }: ApiResponse<CardType> = yield call(
     API.getSingleBook,
@@ -55,6 +52,7 @@ function* getSingleBookWorker(action: PayloadAction<string>) {
     console.warn("Error getting single Book", problem);
   }
 }
+
 // function* getSearchedBooksWorker(
 //   action: PayloadAction<GetSearchedBooksPayload>
 // ) {

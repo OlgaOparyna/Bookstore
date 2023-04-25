@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import classNames from "classnames";
+import React, { useEffect, useState } from "react";
 import Button from "src/components/Button";
 import {
   ArrowIcon,
@@ -13,6 +12,10 @@ import styles from "./Book.module.scss";
 import Tabs from "src/components/Tabs";
 import { TabsNames } from "src/components/Tabs/types";
 import Title from "src/components/Title";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { BookSelectors, getSingleBook } from "src/redux/reducers/bookSlice";
+import EmptyState from "src/components/EmptyState";
 const Book = () => {
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
   const onTabClick = (key: TabsNames) => () => {
@@ -32,29 +35,18 @@ const Book = () => {
       key: TabsNames.Reviews,
     },
   ];
-  const book = {
-    error: 0,
-    title: "Securing DevOps",
-    subtitle: "Security in the Cloud",
-    authors: "Julien Vehent",
-    publisher: "Manning",
-    isbn10: 1617294136,
-    isbn13: 9781617294136,
-    pages: 384,
-    year: 2018,
-    rating: 5,
-    desc: "An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps team's highest priority is understanding those risks and hardening the system against them.Securing DevOps teaches you the essential techniques to secure your cloud ...",
-    price: "$26.98",
-    image: "https://itbook.store/img/books/9781617294136.png",
-    url: "https://itbook.store/books/9781617294136",
-    pdf: {
-      "Chapter 2": "https://itbook.store/files/9781617294136/chapter2.pdf",
-      "Chapter 5": "https://itbook.store/files/9781617294136/chapter5.pdf",
-    },
-  };
 
-  return (
-    // book ?
+  const params = useParams();
+  const { isbn13 } = params;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (isbn13) {
+      dispatch(getSingleBook(isbn13));
+    }
+  }, []);
+  const book = useSelector(BookSelectors.getSingleBook);
+  return book ? (
     <div className={styles.container}>
       <div>
         <div className={styles.arrowIcon}>
@@ -111,7 +103,6 @@ const Book = () => {
         </div>
       </div>
     </div>
-  );
-  //: null;
+  ) : null;
 };
 export default Book;

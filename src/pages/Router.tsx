@@ -11,15 +11,15 @@ import Home from "src/pages/Home";
 
 export enum RoutesList {
     Home = "/",
-    Book = "/bookstore/:id",
-    Search = "/bookstore/search",
-    Account = "/bookstore/account",
-    Basket = "/bookstore/basket",
-    FavoritesBooks = "/bookstore/favorites-books",
-    SignIn = "/bookstore/sign-in",
-    SignUp = "/bookstore/sing-up",
-    ResetPassword = "/bookstore/sign-up/reset-password",
-    NewPassword = "/bookstore/sign-up/new-password",
+    Book = "/:id",
+    Search = "/search",
+    Account = "/account",
+    Basket = "/basket",
+    FavoritesBooks = "/favorites-books",
+    SignIn = "/sign-in",
+    SignUp = "/sing-up",
+    ResetPassword = "/sign-up/reset-password",
+    NewPassword = "/sign-up/new-password",
     Default = "*",
 }
 const Router = () => {
