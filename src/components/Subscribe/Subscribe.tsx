@@ -1,10 +1,14 @@
-import React from "react";
-import Subtitle from "src/components/Subtitle";
+import React, {useState} from "react";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
 import styles from "./Subscribe.module.scss";
+import ButtonMailto from "src/components/ButtonMailTo";
 
 const Subscribe = () => {
+  const [email, setEmail] = useState("");
+  const onChangeEmail = (value: string) => {
+    setEmail(value);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -15,15 +19,12 @@ const Subscribe = () => {
         </div>
         <div className={styles.inputContainer}>
           <Input
-            value="Your email"
-            onChange={() => {}}
+            value= {email}
+            onChange={onChangeEmail}
             placeholder="Your email"
             inputClassName={styles.input}
           />
-          <Button
-            title="Subscribe"
-            onClick={() => {}}
-            buttonClassName={styles.button}
+          <ButtonMailto mailto={"example@google.com"} label={"Subscribe"} buttonClassName={styles.button}
           />
         </div>
       </div>

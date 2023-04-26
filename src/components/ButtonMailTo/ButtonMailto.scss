@@ -1,0 +1,12 @@
+@import "src/assets/mixins";
+@import "src/assets/colors";
+
+.primaryButton{
+  @include button();
+  background-color: $primary;
+  color: $white;
+  text-decoration: none;
+  &:hover{
+    background-color: $primary-secondary;
+  }
+}
