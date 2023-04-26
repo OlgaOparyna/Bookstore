@@ -2,7 +2,7 @@ import { takeLatest, all, call, put, takeLeading } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponse } from "apisauce";
 
-import { CardType } from "src/utils/@globalTypes";
+import {CardType, SingleBook} from "src/utils/@globalTypes";
 // import {
 //   GetAllBooksPayload,
 //   GetSearchedBooksPayload,
@@ -42,7 +42,7 @@ function* getAllBooksWorker() {
 //     yield put(setAllPostsLoading(false));
 // }
 function* getSingleBookWorker(action: PayloadAction<string>) {
-  const { ok, data, problem }: ApiResponse<CardType> = yield call(
+  const { ok, data, problem }: ApiResponse<SingleBook> = yield call(
     API.getSingleBook,
     action.payload
   );

@@ -1,0 +1,100 @@
+@import "src/assets/colors";
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.arrowIcon {
+  margin-bottom: 32px;
+}
+.infoContainer {
+  display: flex;
+  gap: 128px;
+}
+.rightBlock {
+  display: flex;
+  flex-direction: column;
+  width: 544px;
+  height: 472px;
+  box-sizing: border-box;
+  background-color: $purple;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.image {
+  width: 300px;
+  height: 350px;
+  object-fit: cover;
+}
+.heartIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 56px;
+  height: 56px;
+  padding: 14px;
+  svg > path {
+    stroke: $white;
+  }
+ &:hover {
+    cursor: pointer;
+  }
+}
+.leftBlock{
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid $gray;
+  width: 448px;
+}
+.leftBlockInfo{
+  display: flex;
+  justify-content: space-between;
+}
+.price{
+  margin: 40px 0 24px;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+  color: $primary;
+}
+.rating{
+  margin: 40px 0 24px;
+}
+.text{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $secondary;
+}
+.textBook{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: $primary;
+}
+.bookButton{
+  margin: 59px 0 40px;
+}
+.previewBook{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+.centerBlock{
+  margin-top: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.tabs{
+  padding: 0 40px 24px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.socialIcons{
+  display: flex;
+  justify-content: flex-start;
+  gap: 25px;
+}

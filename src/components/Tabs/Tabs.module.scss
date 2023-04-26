@@ -2,21 +2,14 @@
 
 .container{
   display: flex;
-  width: 480px;
   border-bottom: 1px solid $gray;
-  margin-left: 32px;
+  gap: 40px;
 }
 .tab{
-  padding: 26px 0 20px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 24px;
-  color: $secondary;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   text-align: center;
-  letter-spacing: 0.05em;
+  color: $secondary;
   &:hover{
     color: $primary;
     cursor: pointer;

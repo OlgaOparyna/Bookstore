@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 
 type TitleProps = {
-    title: string;
+    title?: string;
 };
 const Title: FC<TitleProps> = ({ title }) => {
     return (

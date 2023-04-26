@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { CardListType, CardType } from "src/utils/@globalTypes";
+import {CardListType, CardType, SingleBook} from "src/utils/@globalTypes";
 import {
     GetAllBooksPayload,
     GetSearchedBooksPayload,
@@ -11,7 +11,7 @@ import { RootState } from "../store";
 
 type initialType = {
     booksList: CardListType;
-    singleBook: CardType | null;
+    singleBook: SingleBook | null;
     // selectedBook: CardType | null;
     // isVisibleSelectedModal: boolean;
     // likeBooks: CardListType;
@@ -56,7 +56,7 @@ const bookSlice = createSlice({
         //     state.BooksCount = BooksCount;
         // },
         getSingleBook: (_, __: PayloadAction<string>) => {},
-        setSingleBook: (state, action: PayloadAction<CardType>) => {
+        setSingleBook: (state, action: PayloadAction<SingleBook>) => {
             state.singleBook = action.payload;
         },
         // setSelectedBook: (state, action: PayloadAction<CardType | null>) => {
