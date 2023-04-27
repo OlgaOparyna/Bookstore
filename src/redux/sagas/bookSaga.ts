@@ -25,22 +25,6 @@ function* getAllBooksWorker() {
     console.warn("Error getting all books", problem);
   }
 }
-// function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
-//     yield put(setAllPostsLoading(true));
-//     const { offset, ordering } = action.payload;
-//     const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
-//         API.getPosts,
-//         offset,
-//         "",
-//         ordering
-//     );
-//     if (ok && data) {
-//         yield put(setAllPosts({ cardList: data.results, postsCount: data.count }));
-//     } else {
-//         console.warn("Error getting all posts", problem);
-//     }
-//     yield put(setAllPostsLoading(false));
-// }
 function* getSingleBookWorker(action: PayloadAction<string>) {
   const { ok, data, problem }: ApiResponse<SingleBook> = yield call(
     API.getSingleBook,

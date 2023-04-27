@@ -6,6 +6,10 @@
   max-width: 352px;
   height: 454px;
   box-sizing: border-box;
+  &:hover {
+    cursor: pointer;
+    color: $primary-secondary;
+  }
 }
 .imageContainer {
   display: flex;
@@ -45,10 +49,6 @@
   overflow: hidden;
   margin-top: 20px;
 
-  &:hover {
-    cursor: pointer;
-    color: $primary-secondary;
-  }
 }
 .subtitle {
   font-weight: 400;

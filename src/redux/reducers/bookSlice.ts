@@ -12,6 +12,7 @@ import { RootState } from "../store";
 type initialType = {
     booksList: CardListType;
     singleBook: SingleBook | null;
+    isAllBooksLoading: boolean;
     // selectedBook: CardType | null;
     // isVisibleSelectedModal: boolean;
     // likeBooks: CardListType;
@@ -20,7 +21,6 @@ type initialType = {
     // searchValue: string;
     // booksCount: number;
     // searchedBooksCount: number;
-    // isAllBooksLoading: boolean;
 };
 // export enum LikeStatus {
 //     Like = "like",
@@ -28,6 +28,7 @@ type initialType = {
 const initialState: initialType = {
     booksList: [],
     singleBook: null,
+    isAllBooksLoading: false,
     // selectedBook: null,
     // isVisibleSelectedModal: false,
     // likeBooks: [],
@@ -36,7 +37,6 @@ const initialState: initialType = {
     // searchValue: "",
     // booksCount: 0,
     // searchedBooksCount: 0,
-    // isAllBooksLoading: false,
 };
 
 const bookSlice = createSlice({
@@ -103,9 +103,9 @@ const bookSlice = createSlice({
         //         state.searchedBooks.push(...cardList);
         //     }
         // },
-        // setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
-        //     state.isAllBooksLoading = action.payload;
-        // },
+        setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
+            state.isAllBooksLoading = action.payload;
+        },
         // setSavedBooks: (state, action: PayloadAction<CardType>) => {
         //     const card = action.payload;
         //     const savedBooksIndex = state.savedBooks.findIndex(
@@ -125,6 +125,7 @@ export const {
     setAllBooks,
     getSingleBook,
     setSingleBook,
+    setAllBooksLoading,
     // setSelectedBook,
     // setBookVisibility,
     // setStatus,
@@ -132,12 +133,13 @@ export const {
     //
     // getSearchedBooks,
     // setSearchedBooks,
-    // setAllBooksLoading,
+
 } = bookSlice.actions;
 export default bookSlice.reducer;
 export const BookSelectors = {
     getAllBooks: (state: RootState) => state.book.booksList,
     getSingleBook: (state: RootState) => state.book.singleBook,
+    getAllBooksLoading: (state: RootState) => state.book.isAllBooksLoading,
     // getSelectedBook: (state: RootState) => state.book.selectedBook,
     // getVisibleSelectedModal: (state: RootState) =>
     //     state.book.isVisibleSelectedModal,
@@ -146,6 +148,5 @@ export const BookSelectors = {
     // getSearchedBooks: (state: RootState) => state.book.searchedBooks,
     // getSearchValue: (state: RootState) => state.book.searchValue,
     // getAllBooksCount: (state: RootState) => state.book.booksCount,
-    // getAllBooksLoading: (state: RootState) => state.book.isAllBooksLoading,
-    // getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
+        // getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
 };

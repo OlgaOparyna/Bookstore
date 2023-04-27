@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import Button from "src/components/Button";
 import {
   ArrowIcon,
@@ -53,20 +53,23 @@ const Book = () => {
   const TABS_BOOK_LIST = [
     {
       title: "Description",
-      key: TabsNames.Description,
-      content: book?.desc,
+      key: TabsNames.Description
     },
     {
       title: "Authors",
       key: TabsNames.Authors,
-      content: book?.authors,
-    },
-    {
-      title: "Reviews",
-      key: TabsNames.Reviews,
-      content: book?.desc,
     },
   ];
+  const tabActiveContent = () => {
+        switch (activeTab) {
+          case TabsNames.Description:
+            return book?.desc;
+          case TabsNames.Authors:
+            return book?.authors;
+          default:
+            return book?.desc;
+        }
+      };
   return book ? (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
@@ -122,6 +125,7 @@ const Book = () => {
           onClick={onTabClick}
           tabsClassName = {styles.tabs}
         />
+        <div>{tabActiveContent()}</div>
         <div className={styles.socialIcons}>
           <a href="https://www.facebook.com/"  target="_blank">
             <FacebookIcon />
