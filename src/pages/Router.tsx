@@ -8,6 +8,7 @@ import SignIn from "src/pages/SingIn";
 import SignUp from "src/pages/SignUp";
 import Book from "src/pages/Book";
 import Home from "src/pages/Home";
+import Search from "src/pages/Search";
 
 export enum RoutesList {
     Home = "/",
@@ -28,7 +29,7 @@ const Router = () => {
             <Routes>
                 <Route path={RoutesList.Home} element={<PagesContainer />}>
                     <Route path={RoutesList.Home} element={<Home/>} />
-                    <Route path={RoutesList.Search} element={"Search"} />
+                    <Route path={RoutesList.Search} element={<Search/>} />
                     <Route
                         path={RoutesList.Account}
                         element={"Account"} />

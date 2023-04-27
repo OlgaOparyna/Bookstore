@@ -11,27 +11,6 @@ export type CardType = {
 }
 export type CardListType = CardType[]
 
-// export interface IBook {
-//     title: string;
-//     subtitle: string;
-//     isbn13: string;
-//     price: string;
-//     image: string;
-//     url: string;
-// }
-//
-// export type CardTypeResponse = {
-//     error: string;
-//     total: string;
-//     books: IBook[];
-// }
-//
-// export type BookSearchResponse = {
-//     total: string;
-//     page: string;
-//     books: IBook[];
-// }
-//
 export type SingleBook = {
     error: string;
     title: string;
@@ -68,8 +47,3 @@ export type SingleBook = {
 //     pdf?: { [key: string]: string };
 //     quantity: number;
 // }
-//
-// export type SearchBookValue = {
-//     query: string;
-//     page: number;
-//}

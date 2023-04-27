@@ -1,5 +1,5 @@
 import React, { useState, KeyboardEvent } from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { RoutesList } from "src/pages/Router";
@@ -14,7 +14,7 @@ import {
   UserIcon,
 } from "src/assets/icons";
 import styles from "./Header.module.scss";
-// import { getSearchedBooks } from "src/redux/reducers/bookSlice";
+import {getSearchedBooks} from "src/redux/reducers/bookSlice";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -33,7 +33,6 @@ const Header = () => {
     setHeartOpened(true);
     setBasketOpened(false);
   };
-  // TODO снимать эктив
   const onBasketClick = () => {
     navigate(RoutesList.Basket);
     setBasketOpened(true);
@@ -45,7 +44,7 @@ const Header = () => {
     setHeartOpened(false);
   };
   const onClickSearchButton = () => {
-    // dispatch(getSearchedBooks({ searchValue, isOverwrite: true, offset: 0 }));
+    // dispatch(getSearchedBooks(searchValue));
     setSearchValue("");
     navigate(RoutesList.Search);
     setBasketOpened(false);

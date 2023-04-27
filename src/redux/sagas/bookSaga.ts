@@ -2,24 +2,18 @@ import { takeLatest, all, call, put, takeLeading } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponse } from "apisauce";
 
-import {CardType, SingleBook} from "src/utils/@globalTypes";
-// import {
-//   GetAllBooksPayload,
-//   GetSearchedBooksPayload,
-// } from "src/redux/reducers/@types";
+import {SingleBook} from "src/utils/@globalTypes";
 import {
-  getAllBooks, getSingleBook,
-  setAllBooks, setSingleBook,
-  // setSearchedBooks,
-  // getSearchedBooks,
-  // setAllBooksLoading,
+  getAllBooks, getSearchedBooks, getSingleBook,
+  setAllBooks, setSearchedBooks, setSingleBook,
 } from "../reducers/bookSlice";
 import API from "../api";
-// import { AllBooksResponse } from "./@types";
+import {GetSearchedBooksPayload} from "src/redux/reducers/@types";
+import {AllBooksResponse, AllSearchedBooksResponse} from "src/redux/sagas/@types";
 
 function* getAllBooksWorker() {
-  const { ok, data, problem }: ApiResponse<any> = yield call(API.getBooks);
-  if (ok) {
+  const { ok, data, problem }: ApiResponse<AllBooksResponse> = yield call(API.getBooks);
+  if (ok && data) {
     yield put(setAllBooks(data.books));
   } else {
     console.warn("Error getting all books", problem);
@@ -37,31 +31,26 @@ function* getSingleBookWorker(action: PayloadAction<string>) {
   }
 }
 
-// function* getSearchedBooksWorker(
-//   action: PayloadAction<GetSearchedBooksPayload>
-// ) {
-//   const { searchValue, isOverwrite, offset } = action.payload;
-//   const { ok, data, problem }: ApiResponse<AllBooksResponse> = yield call(
-//     API.getBooks,
-//     offset,
-//     searchValue
-//   );
-//   if (ok && data) {
-//     yield put(
-//       setSearchedBooks({
-//         cardList: data.results,
-//         BooksCount: data.count,
-//         isOverwrite,
-//       })
-//     );
-//   } else {
-//     console.warn("Error getting search Books", problem);
-//   }
-// }
+function* getSearchedBooksWorker(action: PayloadAction<GetSearchedBooksPayload>
+) {
+  const { query, page } = action.payload;
+  const { ok, data, problem }: ApiResponse<AllSearchedBooksResponse> = yield call(
+    API.getSearchedBooks,
+      query,
+      page
+  );
+  if (ok && data) {
+    yield put(
+      setSearchedBooks(data.books)
+    );
+  } else {
+    console.warn("Error getting search books", problem);
+  }
+}
 export default function* BooksSaga() {
   yield all([
     takeLatest(getAllBooks, getAllBooksWorker),
     takeLatest(getSingleBook, getSingleBookWorker),
-    // takeLeading(getSearchedBooks, getSearchedBooksWorker),
+    takeLatest(getSearchedBooks, getSearchedBooksWorker),
   ]);
 }
