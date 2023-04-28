@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Button from "src/components/Button";
 import {
   ArrowIcon,
@@ -18,8 +18,6 @@ import {
   BookSelectors,
   getAllBooks,
   getSingleBook,
-  setBookVisibility,
-  setPreviewBook
 } from "src/redux/reducers/bookSlice";
 import Subscribe from "src/components/Subscribe";
 import { RoutesList } from "src/pages/Router";
@@ -53,12 +51,12 @@ const Book = () => {
   }, []);
 
   const booksList = useSelector(BookSelectors.getAllBooks);
-  const similarBookList = booksList.slice(0, 3)
+  const similarBookList = booksList.slice(0, 3);
   const book = useSelector(BookSelectors.getSingleBook);
   const TABS_BOOK_LIST = [
     {
       title: "Description",
-      key: TabsNames.Description
+      key: TabsNames.Description,
     },
     {
       title: "Authors",
@@ -66,24 +64,18 @@ const Book = () => {
     },
   ];
   const tabActiveContent = () => {
-        switch (activeTab) {
-          case TabsNames.Description:
-            return book?.desc;
-          case TabsNames.Authors:
-            return book?.authors;
-          default:
-            return book?.desc;
-        }
-      };
-  const isVisible = useSelector(BookSelectors.getVisibleSelectedModal);
-  const valuesArray = !!book?.pdf ? Object.values(book?.pdf) : []
-  const value = valuesArray[0]
-  console.log(value)
-  //const value = Object.values(book?.pdf)[0]
-  const onPreviewBookClick = () => {
-    dispatch(setPreviewBook(value));
-    dispatch(setBookVisibility(true));
+    switch (activeTab) {
+      case TabsNames.Description:
+        return book?.desc;
+      case TabsNames.Authors:
+        return book?.authors;
+      default:
+        return book?.desc;
+    }
   };
+  const valuesArray = !!book?.pdf ? Object.values(book?.pdf) : [];
+  const value = valuesArray[0];
+
   return book ? (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
@@ -105,7 +97,9 @@ const Book = () => {
 
         <div className={styles.leftBlock}>
           <div className={styles.leftBlockInfo}>
-            <div className={styles.price}>{book?.price} </div>
+            <div className={styles.price}>
+              {book?.price === "$0.00" ? "FREE" : book?.price}
+            </div>
             <div className={styles.rating}>{book?.rating} </div>
           </div>
           <div className={styles.leftBlockInfo}>
@@ -128,12 +122,11 @@ const Book = () => {
           <div className={styles.bookButton}>
             <Button title={"Add to cart"} onClick={() => {}} />
           </div>
-          {/*{!isVisible && (*/}
-
-          {/*<div className={styles.previewBook} onClick={onPreviewBookClick}>Preview book</div>)}*/}
-          { book.pdf && (<a href={value} className={styles.previewBook} target="_blank">
-            Preview book
-          </a>)}
+          {book.pdf && (
+            <a href={value} className={styles.previewBook} target="_blank">
+              Preview book
+            </a>
+          )}
         </div>
       </div>
 
@@ -142,11 +135,11 @@ const Book = () => {
           tabsListArray={TABS_BOOK_LIST}
           activeTab={activeTab}
           onClick={onTabClick}
-          tabsClassName = {styles.tabs}
+          tabsClassName={styles.tabs}
         />
         <div>{tabActiveContent()}</div>
         <div className={styles.socialIcons}>
-          <a href="https://www.facebook.com/"  target="_blank">
+          <a href="https://www.facebook.com/" target="_blank">
             <FacebookIcon />
           </a>
           <a href="https://twitter.com/" target="_blank">
@@ -157,12 +150,14 @@ const Book = () => {
           </a>
         </div>
       </div>
-        <Subscribe />
+      <Subscribe />
       <div>
-        <Subtitle subtitle={"Similar Books"}/>
-        <CardList cardsList={similarBookList}/>
+        <Subtitle subtitle={"Similar Books"} />
+        <CardList cardsList={similarBookList} />
       </div>
-          </div>
-  ) : <EmptyState title={"Sorry"} description={"Something wrong"}/>
+    </div>
+  ) : (
+    <EmptyState title={"Sorry"} description={"Something wrong"} />
+  );
 };
 export default Book;

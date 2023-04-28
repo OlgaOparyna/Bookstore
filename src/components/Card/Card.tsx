@@ -34,7 +34,7 @@ const Card: FC<CardProps> = ({ card }) => {
           {title}
         </div>
         <div className={styles.subtitle}>{subtitle}</div>
-        <div className={styles.price}>{price}</div>
+        <div className={styles.price}>{price === "$0.00" ? "FREE" : price}</div>
       </div>
     </div>
   );
