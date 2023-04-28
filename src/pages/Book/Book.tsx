@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from "react";
+import React, {FC, ReactNode, useEffect, useState} from "react";
 import Button from "src/components/Button";
 import {
   ArrowIcon,
@@ -14,7 +14,13 @@ import { TabsNames } from "src/components/Tabs/types";
 import Title from "src/components/Title";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {BookSelectors, getAllBooks, getSingleBook} from "src/redux/reducers/bookSlice";
+import {
+  BookSelectors,
+  getAllBooks,
+  getSingleBook,
+  setBookVisibility,
+  setPreviewBook
+} from "src/redux/reducers/bookSlice";
 import Subscribe from "src/components/Subscribe";
 import { RoutesList } from "src/pages/Router";
 import MoreDetailse from "src/components/MoreDetailse";
@@ -31,7 +37,6 @@ const Book = () => {
   const onArrowIconClick = () => {
     navigate(RoutesList.Home);
   };
-
 
   const params = useParams();
   const { id } = params;
@@ -70,6 +75,15 @@ const Book = () => {
             return book?.desc;
         }
       };
+  const isVisible = useSelector(BookSelectors.getVisibleSelectedModal);
+  const valuesArray = !!book?.pdf ? Object.values(book?.pdf) : []
+  const value = valuesArray[0]
+  console.log(value)
+  //const value = Object.values(book?.pdf)[0]
+  const onPreviewBookClick = () => {
+    dispatch(setPreviewBook(value));
+    dispatch(setBookVisibility(true));
+  };
   return book ? (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
@@ -114,7 +128,12 @@ const Book = () => {
           <div className={styles.bookButton}>
             <Button title={"Add to cart"} onClick={() => {}} />
           </div>
-          <div className={styles.previewBook}>Preview book</div>
+          {/*{!isVisible && (*/}
+
+          {/*<div className={styles.previewBook} onClick={onPreviewBookClick}>Preview book</div>)}*/}
+          { book.pdf && (<a href={value} className={styles.previewBook} target="_blank">
+            Preview book
+          </a>)}
         </div>
       </div>
 

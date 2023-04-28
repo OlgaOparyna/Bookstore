@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { CardListType, SingleBook } from "src/utils/@globalTypes";
+import {CardListType, CardType, SingleBook} from "src/utils/@globalTypes";
 import { RootState } from "../store";
 import {GetSearchedBooksPayload} from "src/redux/reducers/@types";
+import {ReactNode} from "react";
 
 type initialType = {
   booksList: CardListType;
@@ -11,8 +12,8 @@ type initialType = {
   searchedBooks: CardListType;
   searchedValue: string;
   searchedBooksCount: number;
-  // selectedBook: CardType | null;
-  // isVisibleSelectedModal: boolean;
+  previewBook: ReactNode | null;
+  isVisibleSelectedModal: boolean;
   // likeBooks: CardListType;
   // savedBooks: CardListType;
 
@@ -28,8 +29,8 @@ const initialState: initialType = {
   searchedBooks: [],
   searchedValue: "",
   searchedBooksCount: 0,
-  // selectedBook: null,
-  // isVisibleSelectedModal: false,
+  previewBook: null,
+  isVisibleSelectedModal: false,
   // likeBooks: [],
   // savedBooks: [],
   // booksCount: 0,
@@ -64,12 +65,12 @@ const bookSlice = createSlice({
     setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;
     },
-    // setSelectedBook: (state, action: PayloadAction<CardType | null>) => {
-    //     state.selectedBook = action.payload;
-    // },
-    // setBookVisibility: (state, action: PayloadAction<boolean>) => {
-    //     state.isVisibleSelectedModal = action.payload;
-    // },
+    setPreviewBook: (state, action: PayloadAction<ReactNode | null>) => {
+        state.previewBook = action.payload;
+    },
+    setBookVisibility: (state, action: PayloadAction<boolean>) => {
+        state.isVisibleSelectedModal = action.payload;
+    },
     // setStatus(
     //     state,
     //     action: PayloadAction<{ status: LikeStatus; card: CardType }>
@@ -112,8 +113,8 @@ export const {
   getSearchedBooks,
   setSearchedBooks,
   setAllBooksLoading,
-  // setSelectedBook,
-  // setBookVisibility,
+  setPreviewBook,
+  setBookVisibility,
   // setStatus,
   // setSavedBooks,
 } = bookSlice.actions;
@@ -125,9 +126,9 @@ export const BookSelectors = {
   getSearchedBooks: (state: RootState) => state.book.searchedBooks,
   getSearchValue: (state: RootState) => state.book.searchedValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
-  // getSelectedBook: (state: RootState) => state.book.selectedBook,
-  // getVisibleSelectedModal: (state: RootState) =>
-  //     state.book.isVisibleSelectedModal,
+  getPreviewBook: (state: RootState) => state.book.previewBook,
+  getVisibleSelectedModal: (state: RootState) =>
+      state.book.isVisibleSelectedModal,
   // getLikeBooks: (state: RootState) => state.book.likeBooks,
   // getSavedBooks: (state: RootState) => state.book.savedBooks,
   // getAllBooksCount: (state: RootState) => state.book.booksCount,

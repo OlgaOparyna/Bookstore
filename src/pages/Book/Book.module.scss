@@ -80,6 +80,12 @@
   font-size: 16px;
   line-height: 24px;
   text-align: center;
+  text-decoration: none;
+  color: $primary;
+  &:hover{
+    cursor: pointer;
+    font-size: 18px;
+  }
 }
 .centerBlock{
   margin-top: 72px;
