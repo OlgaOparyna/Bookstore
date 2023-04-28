@@ -9,7 +9,7 @@ type initialType = {
   singleBook: SingleBook | null;
   isAllBooksLoading: boolean;
   searchedBooks: CardListType;
-  searchedValue: string;
+  searchValue: string;
   searchedBooksCount: number;
   // likeBooks: CardListType;
   // savedBooks: CardListType;
@@ -24,7 +24,7 @@ const initialState: initialType = {
   singleBook: null,
   isAllBooksLoading: false,
   searchedBooks: [],
-  searchedValue: "",
+  searchValue: "",
   searchedBooksCount: 0,
   // likeBooks: [],
   // savedBooks: [],
@@ -52,7 +52,7 @@ const bookSlice = createSlice({
       state.singleBook = action.payload;
     },
     getSearchedBooks: (state, action: PayloadAction<GetSearchedBooksPayload >) => {
-      state.searchedValue = action.payload.query;
+      state.searchValue = action.payload.query;
     },
     setSearchedBooks: (state, action: PayloadAction<CardListType>) => {
       state.searchedBooks = action.payload;
@@ -111,7 +111,7 @@ export const BookSelectors = {
   getSingleBook: (state: RootState) => state.book.singleBook,
   getAllBooksLoading: (state: RootState) => state.book.isAllBooksLoading,
   getSearchedBooks: (state: RootState) => state.book.searchedBooks,
-  getSearchValue: (state: RootState) => state.book.searchedValue,
+  getSearchValue: (state: RootState) => state.book.searchValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
   // getLikeBooks: (state: RootState) => state.book.likeBooks,
   // getSavedBooks: (state: RootState) => state.book.savedBooks,

@@ -13,7 +13,7 @@ import Search from "src/pages/Search";
 export enum RoutesList {
     Home = "/",
     Book = "/:id",
-    Search = "/search",
+    Search = "/search/:query",
     Account = "/account",
     Basket = "/basket",
     FavoritesBooks = "/favorites-books",

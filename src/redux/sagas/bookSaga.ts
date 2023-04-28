@@ -33,11 +33,10 @@ function* getSingleBookWorker(action: PayloadAction<string>) {
 
 function* getSearchedBooksWorker(action: PayloadAction<GetSearchedBooksPayload>
 ) {
-  const { query, page } = action.payload;
+  const { query} = action.payload;
   const { ok, data, problem }: ApiResponse<AllSearchedBooksResponse> = yield call(
     API.getSearchedBooks,
-      query,
-      page
+      query
   );
   if (ok && data) {
     yield put(
@@ -51,6 +50,6 @@ export default function* BooksSaga() {
   yield all([
     takeLatest(getAllBooks, getAllBooksWorker),
     takeLatest(getSingleBook, getSingleBookWorker),
-    takeLatest(getSearchedBooks, getSearchedBooksWorker),
+    takeLeading(getSearchedBooks, getSearchedBooksWorker),
   ]);
 }

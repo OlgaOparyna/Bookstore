@@ -6,21 +6,21 @@ import SearchCardList from "src/components/SearchCardList";
 import {BookSelectors, getSearchedBooks} from "src/redux/reducers/bookSlice";
 
 const Search = () => {
-    const [page, setPage] = useState(1);
     const dispatch = useDispatch();
-    const searchValue = useSelector(BookSelectors.getSearchValue);
+    const query = useSelector(BookSelectors.getSearchValue);
     const cardList = useSelector(BookSelectors.getSearchedBooks);
+    const total = useSelector(BookSelectors.getSearchedBooksCount)
 
     useEffect(() => {
-        const offset = (page - 1) * page;
-        dispatch(getSearchedBooks);
-    }, [page]);
-    const onNextReached = () => {
-        setPage(page + 1);
-    };
+        dispatch(getSearchedBooks({query}));
+    }, []);
+
     return (
         <div>
-            <Title title={searchValue} />
+            <Title title={`'${query}' Search results`} />
+            <div>
+                "Found ${total} books"
+            </div>
                 <SearchCardList cardsList={cardList} />
         </div>
     );

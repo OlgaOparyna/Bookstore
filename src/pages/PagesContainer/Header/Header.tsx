@@ -17,7 +17,7 @@ import styles from "./Header.module.scss";
 import {getSearchedBooks} from "src/redux/reducers/bookSlice";
 
 const Header = () => {
-  const [searchValue, setSearchValue] = useState("");
+  const [query, setQuery] = useState("");
   const [isHeartOpened, setHeartOpened] = useState(false);
   const [isBasketOpened, setBasketOpened] = useState(false);
 
@@ -44,8 +44,8 @@ const Header = () => {
     setHeartOpened(false);
   };
   const onClickSearchButton = () => {
-    // dispatch(getSearchedBooks(searchValue));
-    setSearchValue("");
+    dispatch(getSearchedBooks({query}));
+    setQuery("");
     navigate(RoutesList.Search);
     setBasketOpened(false);
     setHeartOpened(false);
@@ -63,8 +63,8 @@ const Header = () => {
         </div>
         <div className={styles.searchContainer}>
           <Input
-            value={searchValue}
-            onChange={setSearchValue}
+            value={query}
+            onChange={setQuery}
             placeholder="Search"
             onKeyDown={onKeyDown}
             inputClassName={styles.input}
