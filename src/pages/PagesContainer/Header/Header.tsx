@@ -46,7 +46,7 @@ const Header = () => {
   const onClickSearchButton = () => {
     dispatch(getSearchedBooks({query}));
     setQuery("");
-    navigate(RoutesList.Search);
+    navigate(`/search/${query}`);
     setBasketOpened(false);
     setHeartOpened(false);
   };

@@ -11,10 +11,9 @@ type initialType = {
   searchedBooks: CardListType;
   searchValue: string;
   searchedBooksCount: number;
+  savedBooks: CardListType;
+  booksCount: number;
   // likeBooks: CardListType;
-  // savedBooks: CardListType;
-
-  // booksCount: number;
 };
 // export enum LikeStatus {
 //     Like = "like",
@@ -26,9 +25,9 @@ const initialState: initialType = {
   searchedBooks: [],
   searchValue: "",
   searchedBooksCount: 0,
+  savedBooks: [],
+  booksCount: 0,
   // likeBooks: [],
-  // savedBooks: [],
-  // booksCount: 0,
 };
 
 const bookSlice = createSlice({
@@ -57,8 +56,16 @@ const bookSlice = createSlice({
     setSearchedBooks: (state, action: PayloadAction<CardListType>) => {
       state.searchedBooks = action.payload;
     },
-    setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
-      state.isAllBooksLoading = action.payload;
+    setSavedBooks: (state, action: PayloadAction<CardType>) => {
+      const card = action.payload;
+      const savedBooksIndex = state.savedBooks.findIndex(
+          (book) => book.isbn13 === card.isbn13
+      );
+      if (savedBooksIndex === -1) {
+        state.savedBooks.push(action.payload);
+      } else {
+        state.savedBooks.splice(savedBooksIndex, 1);
+      }
     },
     // setStatus(
     //     state,
@@ -80,18 +87,9 @@ const bookSlice = createSlice({
     //     state[mainKey].splice(mainIndex, 1);
     // }
     // },
-    // setSavedBooks: (state, action: PayloadAction<CardType>) => {
-    //     const card = action.payload;
-    //     const savedBooksIndex = state.savedBooks.findIndex(
-    //         (Book) => Book.isbn13 === card.isbn13
-    //     );
-    //
-    //     if (savedBooksIndex === -1) {
-    //         state.savedBooks.push(action.payload);
-    //     } else {
-    //         state.savedBooks.splice(savedBooksIndex, 1);
-    //     }
-    // },
+    setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
+      state.isAllBooksLoading = action.payload;
+    },
   },
 });
 export const {
@@ -102,8 +100,8 @@ export const {
   getSearchedBooks,
   setSearchedBooks,
   setAllBooksLoading,
+  setSavedBooks,
   // setStatus,
-  // setSavedBooks,
 } = bookSlice.actions;
 export default bookSlice.reducer;
 export const BookSelectors = {
@@ -113,7 +111,7 @@ export const BookSelectors = {
   getSearchedBooks: (state: RootState) => state.book.searchedBooks,
   getSearchValue: (state: RootState) => state.book.searchValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
+  getSavedBooks: (state: RootState) => state.book.savedBooks,
+  getAllBooksCount: (state: RootState) => state.book.booksCount,
   // getLikeBooks: (state: RootState) => state.book.likeBooks,
-  // getSavedBooks: (state: RootState) => state.book.savedBooks,
-  // getAllBooksCount: (state: RootState) => state.book.booksCount,
 };

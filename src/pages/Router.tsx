@@ -9,6 +9,7 @@ import SignUp from "src/pages/SignUp";
 import Book from "src/pages/Book";
 import Home from "src/pages/Home";
 import Search from "src/pages/Search";
+import Basket from "src/pages/Basket";
 
 export enum RoutesList {
     Home = "/",
@@ -34,7 +35,7 @@ const Router = () => {
                         path={RoutesList.Account}
                         element={"Account"} />
                     <Route path={RoutesList.Book} element={<Book/>} />
-                    <Route path={RoutesList.Basket} element={"Basket"} />
+                    <Route path={RoutesList.Basket} element={<Basket/>} />
                     <Route path={RoutesList.SignIn} element={<SignIn/>} />
                     <Route path={RoutesList.SignUp} element={<SignUp/>} />
                     <Route

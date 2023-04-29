@@ -1,0 +1,70 @@
+@import "src/assets/colors";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1200px;
+}
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 192px;
+  width: 256px;
+}
+.blueImageContainer {
+  background-color: $blue;
+}
+.greenImageContainer {
+  background-color: $green;
+}
+.orangeImageContainer {
+  background-color: $orange;
+}
+.purpleImageContainer {
+  background-color: $purple;
+}
+.image {
+  width: 144px;
+  height: 172px;
+  object-fit: cover;
+}
+.mainInfoContainer {
+  display: flex;
+  flex-direction: column;
+}
+.infoContainer {
+  margin: 24px 0;
+}
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  color: $primary;
+  text-transform: uppercase;
+}
+.subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $secondary;
+  margin-top: 8px;
+}
+.count {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px 0;
+}
+.quantity{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}
+.price {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 60px;
+  padding: 0 120px;
+}

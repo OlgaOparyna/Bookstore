@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   BookSelectors,
   getAllBooks,
-  getSingleBook,
+  getSingleBook, setSavedBooks,
 } from "src/redux/reducers/bookSlice";
 import Subscribe from "src/components/Subscribe";
 import { RoutesList } from "src/pages/Router";
@@ -25,20 +25,16 @@ import MoreDetailse from "src/components/MoreDetailse";
 import EmptyState from "src/components/EmptyState";
 import Subtitle from "src/components/Subtitle";
 import CardList from "src/components/CardList";
+import card from "src/components/Card";
 const Book = () => {
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
+  const booksList = useSelector(BookSelectors.getAllBooks);
+  const similarBookList = booksList.slice(0, 3);
+  const book = useSelector(BookSelectors.getSingleBook);
+
   const navigate = useNavigate();
-
-  const onTabClick = (key: TabsNames) => () => {
-    setActiveTab(key);
-  };
-  const onArrowIconClick = () => {
-    navigate(RoutesList.Home);
-  };
-
   const params = useParams();
   const { id } = params;
-  console.log("Id from URL", params?.id);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -49,10 +45,10 @@ const Book = () => {
   useEffect(() => {
     dispatch(getAllBooks());
   }, []);
-
-  const booksList = useSelector(BookSelectors.getAllBooks);
-  const similarBookList = booksList.slice(0, 3);
-  const book = useSelector(BookSelectors.getSingleBook);
+  const onAddCartClick = () => {
+    dispatch(setSavedBooks);
+    navigate(RoutesList.Basket)
+  };
   const TABS_BOOK_LIST = [
     {
       title: "Description",
@@ -75,6 +71,12 @@ const Book = () => {
   };
   const valuesArray = !!book?.pdf ? Object.values(book?.pdf) : [];
   const value = valuesArray[0];
+  const onTabClick = (key: TabsNames) => () => {
+    setActiveTab(key);
+  };
+  const onArrowIconClick = () => {
+    navigate(RoutesList.Home);
+  };
 
   return book ? (
     <div className={styles.container}>
@@ -120,7 +122,7 @@ const Book = () => {
           </div>
           <MoreDetailse />
           <div className={styles.bookButton}>
-            <Button title={"Add to cart"} onClick={() => {}} />
+            <Button title={"Add to cart"} onClick={onAddCartClick} />
           </div>
           {book.pdf && (
             <a href={value} className={styles.previewBook} target="_blank">
