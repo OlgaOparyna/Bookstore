@@ -11,6 +11,7 @@ import Home from "src/pages/Home";
 import Search from "src/pages/Search";
 import Basket from "src/pages/Basket";
 import RegistrationForm from "src/pages/RegistrationForm";
+import FavoritesBooks from "src/pages/FavoritesBooks";
 
 export enum RoutesList {
     Home = "/",
@@ -20,8 +21,6 @@ export enum RoutesList {
     Basket = "/basket",
     FavoritesBooks = "/favorites-books",
     RegistrationForm = "/registration",
-    SignIn = "/sign-in",
-    SignUp = "/sing-up",
     ResetPassword = "/sign-up/reset-password",
     NewPassword = "/sign-up/new-password",
     Default = "*",
@@ -39,11 +38,9 @@ const Router = () => {
                     <Route path={RoutesList.Book} element={<Book/>} />
                     <Route path={RoutesList.Basket} element={<Basket/>} />
                     <Route path={RoutesList.RegistrationForm} element={<RegistrationForm/>} />
-                    <Route path={RoutesList.SignIn} element={<SignIn/>} />
-                    <Route path={RoutesList.SignUp} element={<SignUp/>} />
                     <Route
                         path={RoutesList.FavoritesBooks}
-                        element={"FavoritesBooks"}
+                        element={<FavoritesBooks/>}
                     />
                     <Route path={RoutesList.ResetPassword} element={<ResetPassword/>} />
                     <Route path={RoutesList.NewPassword} element={<NewPassword/>} />

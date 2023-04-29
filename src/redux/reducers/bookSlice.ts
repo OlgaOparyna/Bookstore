@@ -11,13 +11,9 @@ type initialType = {
   searchedBooks: CardListType;
   searchValue: string;
   searchedBooksCount: number;
-  savedBooks: CardListType;
   booksCount: number;
-  // likeBooks: CardListType;
+  favoritesBooks: CardListType;
 };
-// export enum LikeStatus {
-//     Like = "like",
-// }
 const initialState: initialType = {
   booksList: [],
   singleBook: null,
@@ -25,9 +21,8 @@ const initialState: initialType = {
   searchedBooks: [],
   searchValue: "",
   searchedBooksCount: 0,
-  savedBooks: [],
   booksCount: 0,
-  // likeBooks: [],
+  favoritesBooks: [],
 };
 
 const bookSlice = createSlice({
@@ -56,17 +51,7 @@ const bookSlice = createSlice({
     setSearchedBooks: (state, action: PayloadAction<CardListType>) => {
       state.searchedBooks = action.payload;
     },
-    setSavedBooks: (state, action: PayloadAction<CardType>) => {
-      const card = action.payload;
-      const savedBooksIndex = state.savedBooks.findIndex(
-          (book) => book.isbn13 === card.isbn13
-      );
-      if (savedBooksIndex === -1) {
-        state.savedBooks.push(action.payload);
-      } else {
-        state.savedBooks.splice(savedBooksIndex, 1);
-      }
-    },
+
     // setStatus(
     //     state,
     //     action: PayloadAction<{ status: LikeStatus; card: CardType }>
@@ -100,7 +85,6 @@ export const {
   getSearchedBooks,
   setSearchedBooks,
   setAllBooksLoading,
-  setSavedBooks,
   // setStatus,
 } = bookSlice.actions;
 export default bookSlice.reducer;
@@ -111,7 +95,6 @@ export const BookSelectors = {
   getSearchedBooks: (state: RootState) => state.book.searchedBooks,
   getSearchValue: (state: RootState) => state.book.searchValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
-  getSavedBooks: (state: RootState) => state.book.savedBooks,
   getAllBooksCount: (state: RootState) => state.book.booksCount,
   // getLikeBooks: (state: RootState) => state.book.likeBooks,
 };

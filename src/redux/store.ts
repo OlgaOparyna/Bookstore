@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 
 import bookReducer from "./reducers/bookSlice";
+import basketReducer from "./reducers/basketSlice";
 import rootSaga from "src/redux/sagas/rootSaga";
 
 const sagaMiddleware = createSagaMiddleware()
@@ -9,6 +10,7 @@ const sagaMiddleware = createSagaMiddleware()
 const store = configureStore({
     reducer: {
         book: bookReducer,
+        basket: basketReducer,
     },
     middleware: [sagaMiddleware]
 });
