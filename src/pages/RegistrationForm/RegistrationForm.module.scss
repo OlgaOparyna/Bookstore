@@ -1,0 +1,21 @@
+@import "../../assets/colors";
+.container {
+  border: 1px solid $gray;
+  width: 544px;
+  margin: 70px auto;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 32px;
+}
+.tabs{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  padding: 26px 0 20px;
+  width: 239px;
+}

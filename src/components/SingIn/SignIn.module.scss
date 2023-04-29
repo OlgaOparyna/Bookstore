@@ -1,12 +1,5 @@
-@import "src/assets/colors";
+@import "../../assets/colors";
 .container {
-  border: 1px solid $gray;
-  width: 544px;
-  margin: 70px auto;
-}
-.wrapper {
-  display: flex;
-  flex-direction: column;
 }
 .inputContainer {
   display: flex;
@@ -21,7 +14,7 @@
 }
 .button {
   text-align: center;
-  margin: 40px 32px;
+  margin: 40px 0;
   width: 480px;
 }
 .forgotPassword {
@@ -29,5 +22,8 @@
   font-size: 14px;
   line-height: 32px;
   color: $primary;
-  padding: 8px 0 0 32px;
+  padding-top: 8px;
+  &:hover{
+    cursor: pointer;
+  }
 }

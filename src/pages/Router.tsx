@@ -4,12 +4,13 @@ import PagesContainer from "src/pages/PagesContainer";
 import Page404 from "src/pages/Page404";
 import ResetPassword from "src/pages/ResetPassword/ResetPassword";
 import NewPassword from "src/pages/NewPassword/NewPassword";
-import SignIn from "src/pages/SingIn";
-import SignUp from "src/pages/SignUp";
+import SignIn from "src/components/SingIn";
+import SignUp from "src/components/SignUp";
 import Book from "src/pages/Book";
 import Home from "src/pages/Home";
 import Search from "src/pages/Search";
 import Basket from "src/pages/Basket";
+import RegistrationForm from "src/pages/RegistrationForm";
 
 export enum RoutesList {
     Home = "/",
@@ -18,6 +19,7 @@ export enum RoutesList {
     Account = "/account",
     Basket = "/basket",
     FavoritesBooks = "/favorites-books",
+    RegistrationForm = "/registration",
     SignIn = "/sign-in",
     SignUp = "/sing-up",
     ResetPassword = "/sign-up/reset-password",
@@ -36,6 +38,7 @@ const Router = () => {
                         element={"Account"} />
                     <Route path={RoutesList.Book} element={<Book/>} />
                     <Route path={RoutesList.Basket} element={<Basket/>} />
+                    <Route path={RoutesList.RegistrationForm} element={<RegistrationForm/>} />
                     <Route path={RoutesList.SignIn} element={<SignIn/>} />
                     <Route path={RoutesList.SignUp} element={<SignUp/>} />
                     <Route

@@ -39,7 +39,7 @@ const Header = () => {
     setHeartOpened(false);
   };
   const onUserClick = () => {
-    navigate(RoutesList.SignIn);
+    navigate(RoutesList.RegistrationForm);
     setBasketOpened(false);
     setHeartOpened(false);
   };

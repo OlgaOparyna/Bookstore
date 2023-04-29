@@ -3,39 +3,10 @@ import React, { useState } from "react";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
 import styles from "./SignIn.module.scss";
-import Tabs from "src/components/Tabs";
-import {TabsNames} from "src/components/Tabs/types";
-import {RoutesList} from "src/pages/Router";
-import {useNavigate} from "react-router-dom";
 
 const SignIn= () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [activeTab, setActiveTab] = useState(TabsNames.SIGNIN);
-    const onTabClick = (key: TabsNames) => () => {
-        setActiveTab(key);
-    };
-    const TABS_LIST =  [
-        {
-            title: "SIGN IN",
-            key: TabsNames.SIGNIN,
-        },
-        {
-            title: "SIGN UP",
-            key: TabsNames.SIGNUP,
-        },
-    ]
-    const navigate = useNavigate()
-    const getCurrentList = () => {
-        switch (activeTab) {
-            case TabsNames.SIGNIN:
-                return navigate(RoutesList.SignIn);
-            case TabsNames.SIGNUP:
-                return navigate(RoutesList.SignUp);
-            default:
-                return navigate(RoutesList.SignIn);
-        }
-    };
     const onChangeEmail = (value: string) => {
         setEmail(value);
     };
@@ -44,8 +15,6 @@ const SignIn= () => {
     };
     return (
         <div className={styles.container}>
-            <Tabs tabsListArray={TABS_LIST} activeTab={activeTab} onClick={onTabClick}/>
-            <div className={styles.wrapper}>
                 <div className={styles.inputContainer}>
                     <Input
                         title="Email"
@@ -73,7 +42,6 @@ const SignIn= () => {
                 </div>
                 {/* TODO кнопка validation*/}
             </div>
-        </div>
     );
 };
 export default SignIn;
