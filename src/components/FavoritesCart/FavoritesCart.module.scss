@@ -58,19 +58,12 @@
   color: $secondary;
   margin-top: 8px;
 }
-.count {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin: 24px 0;
-}
-.quantity{
+.price {
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
+  margin-top: 24px;
 }
-.price {
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 60px;
+.icon{
+  padding: 16px;
 }
