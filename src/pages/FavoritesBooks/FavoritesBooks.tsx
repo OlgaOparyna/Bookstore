@@ -10,7 +10,7 @@ import CardList from "src/components/CardList";
 
 const FavotitesBooks = () => {
     const navigate = useNavigate();
-    const favoritesList = useSelector(BookSelectors.getSavedBooks);
+    const favoritesList = useSelector(BookSelectors.getFavoritesBooks);
     const onArrowIconClick = () => {
         navigate(RoutesList.Home);
     };

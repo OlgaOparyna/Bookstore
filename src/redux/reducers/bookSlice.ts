@@ -51,28 +51,18 @@ const bookSlice = createSlice({
     setSearchedBooks: (state, action: PayloadAction<CardListType>) => {
       state.searchedBooks = action.payload;
     },
-
-    // setStatus(
-    //     state,
-    //     action: PayloadAction<{ status: LikeStatus; card: CardType }>
-    // ) {
-    //     const { status, card } = action.payload;
-    //
-    //     const likeIndex = state.likeBooks.findIndex(
-    //         (Book) => Book.isbn13 === card.isbn13
-    //     );
-    //    const isLike = status === LikeStatus.Like;
-    //
-    //     const mainKey = isLike ? "likeBooks" : null;
-    //     const mainIndex = isLike ? likeIndex : null;
-
-    // if (mainIndex === -1) {
-    //     state[mainKey].push(card);
-    // } else {
-    //     state[mainKey].splice(mainIndex, 1);
-    // }
-    // },
-    setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
+    setFavoritesBooks: (state, action: PayloadAction<CardType>) => {
+      const card = action.payload;
+      const savedFavoritesBooksIndex = state.favoritesBooks.findIndex(
+          (book) => book.isbn13 === card.isbn13
+      );
+      if (savedFavoritesBooksIndex === -1) {
+        state.favoritesBooks.push(action.payload);
+      } else {
+        state.favoritesBooks.splice(savedFavoritesBooksIndex, 1);
+      }
+    },
+   setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;
     },
   },
@@ -85,7 +75,7 @@ export const {
   getSearchedBooks,
   setSearchedBooks,
   setAllBooksLoading,
-  // setStatus,
+  setFavoritesBooks,
 } = bookSlice.actions;
 export default bookSlice.reducer;
 export const BookSelectors = {
@@ -96,5 +86,5 @@ export const BookSelectors = {
   getSearchValue: (state: RootState) => state.book.searchValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
   getAllBooksCount: (state: RootState) => state.book.booksCount,
-  // getLikeBooks: (state: RootState) => state.book.likeBooks,
+  getFavoritesBooks: (state: RootState) => state.book.favoritesBooks,
 };

@@ -7,10 +7,11 @@ import {ArrowIcon} from "src/assets/icons";
 import Title from "src/components/Title";
 import {RoutesList} from "src/pages/Router";
 import {useNavigate} from "react-router-dom";
+import {BasketSelectors} from "src/redux/reducers/basketSlice";
 
 const Basket = () => {
     const navigate = useNavigate();
-  const basketList = useSelector(BookSelectors.getSavedBooks);
+  const basketList = useSelector(BasketSelectors.getSavedBooks);
     const onArrowIconClick = () => {
         navigate(RoutesList.Home);
     };
