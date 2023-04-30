@@ -17,15 +17,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   BookSelectors,
   getAllBooks,
-  getSingleBook, setSavedBooks,
+  getSingleBook,
 } from "src/redux/reducers/bookSlice";
 import Subscribe from "src/components/Subscribe";
 import { RoutesList } from "src/pages/Router";
 import MoreDetailse from "src/components/MoreDetailse";
 import EmptyState from "src/components/EmptyState";
-import Subtitle from "src/components/Subtitle";
-import CardList from "src/components/CardList";
-import card from "src/components/Card";
+import {setSavedBooks} from "src/redux/reducers/basketSlice";
+import BookList from "src/components/BookList";
 const Book = () => {
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
   const booksList = useSelector(BookSelectors.getAllBooks);
@@ -154,8 +153,7 @@ const Book = () => {
       </div>
       <Subscribe />
       <div>
-        <Subtitle subtitle={"Similar Books"} />
-        <CardList cardsList={similarBookList} />
+        <BookList title="Similar Books" cardsList={similarBookList}/>
       </div>
     </div>
   ) : (

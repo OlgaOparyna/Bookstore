@@ -1,12 +1,52 @@
+@import "../../assets/colors";
 .container{
   display: flex;
   flex-direction: column;
-  gap: 48px;
 }
-.inputContainer{
+.arrowIcon{
+  margin-bottom: 37px;
+}
+.infoContainer{
   display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-bottom: 72px;
+
+}
+.inputTitle{
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 32px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.inputContainer {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 16px 32px;
+}
+.input{
+  width: 544px;
 }
 .buttons{
   display: flex;
   justify-content: flex-end;
+  gap: 32px;
+  border-top: 1px solid $gray;
 }
+.button {
+  width: 256px;
+  font-weight: 500;
+  margin-top: 48px;
+  }
+.buttonWhite {
+  font-weight: 500;
+  width: 256px;
+  background-color: $white;
+  color: $primary;
+  margin-top: 48px;
+  border: 1px solid $gray;
+  &:hover{
+    background-color: $light;
+  }
+  }

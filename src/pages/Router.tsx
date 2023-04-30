@@ -12,6 +12,7 @@ import Search from "src/pages/Search";
 import Basket from "src/pages/Basket";
 import RegistrationForm from "src/pages/RegistrationForm";
 import FavoritesBooks from "src/pages/FavoritesBooks";
+import Account from "src/pages/Account";
 
 export enum RoutesList {
     Home = "/",
@@ -34,7 +35,7 @@ const Router = () => {
                     <Route path={RoutesList.Search} element={<Search/>} />
                     <Route
                         path={RoutesList.Account}
-                        element={"Account"} />
+                        element={<Account/>} />
                     <Route path={RoutesList.Book} element={<Book/>} />
                     <Route path={RoutesList.Basket} element={<Basket/>} />
                     <Route path={RoutesList.RegistrationForm} element={<RegistrationForm/>} />
