@@ -17,17 +17,17 @@ const FavotitesBooks = () => {
     navigate(RoutesList.Home);
   };
   const booksList = useSelector(BookSelectors.getAllBooks);
-  const similarBookList = booksList.slice(0, 3);
+  const popularBookList = booksList.slice(0, 3);
   return (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
         <ArrowIcon />
       </div>
-      <div className={styles.title}>
+        <div className={styles.title}>
         <Title title="Favorites" />
       </div>
       <CardList cardsList={favoritesList} />
-      <BookList title="Popular Books" cardsList={similarBookList} />
+      <BookList title="Popular Books" cardsList={popularBookList} />
     </div>
   );
 };

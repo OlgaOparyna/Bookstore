@@ -5,21 +5,24 @@ import { ApiResponse } from "apisauce";
 import {SingleBook} from "src/utils/@globalTypes";
 import {
   getAllBooks, getSearchedBooks, getSingleBook,
-  setAllBooks, setSearchedBooks, setSingleBook,
+  setAllBooks, setAllBooksLoading, setSearchedBooks, setSingleBook,
 } from "../reducers/bookSlice";
 import API from "../api";
 import {GetSearchedBooksPayload} from "src/redux/reducers/@types";
 import {AllBooksResponse, AllSearchedBooksResponse} from "src/redux/sagas/@types";
 
 function* getAllBooksWorker() {
+  yield put(setAllBooksLoading(true));
   const { ok, data, problem }: ApiResponse<AllBooksResponse> = yield call(API.getBooks);
   if (ok && data) {
     yield put(setAllBooks(data.books));
   } else {
     console.warn("Error getting all books", problem);
   }
+  yield put(setAllBooksLoading(false));
 }
 function* getSingleBookWorker(action: PayloadAction<string>) {
+  yield put(setAllBooksLoading(true));
   const { ok, data, problem }: ApiResponse<SingleBook> = yield call(
     API.getSingleBook,
     action.payload
@@ -29,10 +32,12 @@ function* getSingleBookWorker(action: PayloadAction<string>) {
   } else {
     console.warn("Error getting single Book", problem);
   }
+  yield put(setAllBooksLoading(false));
 }
 
 function* getSearchedBooksWorker(action: PayloadAction<GetSearchedBooksPayload>
 ) {
+  yield put(setAllBooksLoading(true));
   const { query} = action.payload;
   const { ok, data, problem }: ApiResponse<AllSearchedBooksResponse> = yield call(
     API.getSearchedBooks,
@@ -45,6 +50,7 @@ function* getSearchedBooksWorker(action: PayloadAction<GetSearchedBooksPayload>
   } else {
     console.warn("Error getting search books", problem);
   }
+  yield put(setAllBooksLoading(false));
 }
 export default function* BooksSaga() {
   yield all([

@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {CardListType, CardType, SingleBook} from "src/utils/@globalTypes";
+import {BookListType, CardListType, CardType, SingleBook} from "src/utils/@globalTypes";
 import { RootState } from "../store";
 import {GetSearchedBooksPayload} from "src/redux/reducers/@types";
+import card from "src/components/Card";
 
 type initialType = {
   booksList: CardListType;
@@ -12,6 +13,7 @@ type initialType = {
   searchValue: string;
   searchedBooksCount: number;
   booksCount: number;
+  card: CardType | null;
   favoritesBooks: CardListType;
 };
 const initialState: initialType = {
@@ -22,6 +24,7 @@ const initialState: initialType = {
   searchValue: "",
   searchedBooksCount: 0,
   booksCount: 0,
+  card: null,
   favoritesBooks: [],
 };
 
@@ -52,15 +55,8 @@ const bookSlice = createSlice({
       state.searchedBooks = action.payload;
     },
     setFavoritesBooks: (state, action: PayloadAction<CardType>) => {
-      const card = action.payload;
-      const savedFavoritesBooksIndex = state.favoritesBooks.findIndex(
-          (book) => book.isbn13 === card.isbn13
-      );
-      if (savedFavoritesBooksIndex === -1) {
-        state.favoritesBooks.push(action.payload);
-      } else {
-        state.favoritesBooks.splice(savedFavoritesBooksIndex, 1);
-      }
+     state.card = action.payload;
+     state.favoritesBooks.push(action.payload);
     },
    setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;

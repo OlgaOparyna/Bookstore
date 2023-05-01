@@ -58,8 +58,11 @@
   color: $primary;
 }
 .rating{
-  margin: 40px 0 24px;
-}
+  margin: 55px 0 0;
+  }
+.rate{
+  display: flex;
+  }
 .text{
   font-weight: 400;
   font-size: 16px;

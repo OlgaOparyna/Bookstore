@@ -21,13 +21,14 @@ export type SingleBook = {
     isbn13: string;
     pages: string;
     year: string;
-    rating: string;
+    rating: number;
     desc: string;
     price: string;
     image: string;
     url: string;
     pdf?: { [key: string]: string };
 }
+export type BookListType = SingleBook []
 
 export type BasketCartProps = {
     card: CardType,

@@ -4,6 +4,7 @@ import {
   ArrowIcon,
   FacebookIcon,
   HeartIcon,
+  HeartRedIcon,
   InstagramIcon,
   TwitterIcon,
 } from "src/assets/icons";
@@ -18,36 +19,44 @@ import {
   BookSelectors,
   getAllBooks,
   getSingleBook,
+  setFavoritesBooks,
 } from "src/redux/reducers/bookSlice";
 import Subscribe from "src/components/Subscribe";
 import { RoutesList } from "src/pages/Router";
 import MoreDetailse from "src/components/MoreDetailse";
 import EmptyState from "src/components/EmptyState";
-import {setSavedBooks} from "src/redux/reducers/basketSlice";
 import BookList from "src/components/BookList";
+import { Rate } from 'antd';
+
 const Book = () => {
-  const [activeTab, setActiveTab] = useState(TabsNames.Description);
-  const booksList = useSelector(BookSelectors.getAllBooks);
-  const similarBookList = booksList.slice(0, 3);
   const book = useSelector(BookSelectors.getSingleBook);
+  const booksList = useSelector(BookSelectors.getAllBooks);
+  const favoritesBooks = useSelector(BookSelectors.getFavoritesBooks);
+  const similarBookList = booksList.slice(0, 3);
+  const [activeTab, setActiveTab] = useState(TabsNames.Description);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const params = useParams();
   const { id } = params;
 
-  const dispatch = useDispatch();
   useEffect(() => {
     if (id) {
       dispatch(getSingleBook(id));
     }
   }, []);
+
   useEffect(() => {
     dispatch(getAllBooks());
   }, []);
-  const onAddCartClick = () => {
-    dispatch(setSavedBooks);
-    navigate(RoutesList.Basket)
-  };
+
+  // const onAddCartClick = () => {
+  //   dispatch(setSavedBooks(card));
+  //   navigate(RoutesList.Basket)
+  // };
+  const favoritesBooksIndex = favoritesBooks.findIndex(
+    (book) => book.isbn13 === book.isbn13
+  );
   const TABS_BOOK_LIST = [
     {
       title: "Description",
@@ -76,7 +85,7 @@ const Book = () => {
   const onArrowIconClick = () => {
     navigate(RoutesList.Home);
   };
-
+  const [currentValue, setCurrentValue] = useState(book?.rating)
   return book ? (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
@@ -90,7 +99,9 @@ const Book = () => {
         <div className={styles.rightBlock}>
           <img className={styles.image} src={book?.image} alt={"book image"} />
           <Button
-            title={<HeartIcon />}
+            title={
+              favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon />
+            }
             onClick={() => {}}
             buttonClassName={styles.heartIcon}
           />
@@ -101,7 +112,12 @@ const Book = () => {
             <div className={styles.price}>
               {book?.price === "$0.00" ? "FREE" : book?.price}
             </div>
-            <div className={styles.rating}>{book?.rating} </div>
+            <div className={styles.rating}>
+              <Rate onChange={(value) => {
+                setCurrentValue(value)
+              }} value={currentValue}
+                    className={styles.rate}/>
+            </div>
           </div>
           <div className={styles.leftBlockInfo}>
             <div className={styles.text}>Authors</div>
@@ -121,7 +137,7 @@ const Book = () => {
           </div>
           <MoreDetailse />
           <div className={styles.bookButton}>
-            <Button title={"Add to cart"} onClick={onAddCartClick} />
+            <Button title={"Add to cart"} onClick={() => {}} />
           </div>
           {book.pdf && (
             <a href={value} className={styles.previewBook} target="_blank">
@@ -153,7 +169,7 @@ const Book = () => {
       </div>
       <Subscribe />
       <div>
-        <BookList title="Similar Books" cardsList={similarBookList}/>
+        <BookList title="Similar Books" cardsList={similarBookList} />
       </div>
     </div>
   ) : (
