@@ -14,7 +14,7 @@ import {
   UserIcon,
 } from "src/assets/icons";
 import styles from "./Header.module.scss";
-import {getSearchedBooks} from "src/redux/reducers/bookSlice";
+import {getSearchedBooks, setSearchedBooks} from "src/redux/reducers/bookSlice";
 
 const Header = () => {
   const [query, setQuery] = useState("");
@@ -44,11 +44,9 @@ const Header = () => {
     setHeartOpened(false);
   };
   const onClickSearchButton = () => {
-    dispatch(getSearchedBooks({query}));
+    dispatch(getSearchedBooks({query, page:1}));
     setQuery("");
     navigate(`/search/${query}`);
-    setBasketOpened(false);
-    setHeartOpened(false);
   };
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {

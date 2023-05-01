@@ -7,7 +7,10 @@ import {
   SingleBook,
 } from "src/utils/@globalTypes";
 import { RootState } from "../store";
-import { GetSearchedBooksPayload } from "src/redux/reducers/@types";
+import {
+  GetSearchedBooksPayload,
+  SetSearchedBooksPayload,
+} from "src/redux/reducers/@types";
 import card from "src/components/Card";
 
 type initialType = {
@@ -59,10 +62,17 @@ const bookSlice = createSlice({
     ) => {
       state.searchValue = action.payload.query;
     },
-    setSearchedBooks: (state, action: PayloadAction<CardListType>) => {
-      state.searchedBooks = action.payload;
+    setSearchedBooks: (
+      state,
+      {
+        payload: { booksCount, cardList },
+      }: PayloadAction<SetSearchedBooksPayload>
+    ) => {
+      state.searchedBooks = cardList;
+      state.searchedBooksCount = booksCount;
     },
-    setFavoritesBooks: (state, action: PayloadAction< SingleBook | null>) => {
+
+    setFavoritesBooks: (state, action: PayloadAction<SingleBook | null>) => {
       const book = action.payload;
       const favoritesBooksIndex = state.favoritesBooks.findIndex(
         (el) => el.isbn13 === book?.isbn13
@@ -97,6 +107,5 @@ export const BookSelectors = {
   getSearchedBooks: (state: RootState) => state.book.searchedBooks,
   getSearchValue: (state: RootState) => state.book.searchValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
-  getAllBooksCount: (state: RootState) => state.book.booksCount,
   getFavoritesBooks: (state: RootState) => state.book.favoritesBooks,
 };

@@ -10,6 +10,7 @@ import {
 import API from "../api";
 import {GetSearchedBooksPayload} from "src/redux/reducers/@types";
 import {AllBooksResponse, AllSearchedBooksResponse} from "src/redux/sagas/@types";
+import cardList from "src/components/CardList";
 
 function* getAllBooksWorker() {
   yield put(setAllBooksLoading(true));
@@ -38,14 +39,14 @@ function* getSingleBookWorker(action: PayloadAction<string>) {
 function* getSearchedBooksWorker(action: PayloadAction<GetSearchedBooksPayload>
 ) {
   yield put(setAllBooksLoading(true));
-  const { query} = action.payload;
+  const { query, page} = action.payload;
   const { ok, data, problem }: ApiResponse<AllSearchedBooksResponse> = yield call(
     API.getSearchedBooks,
-      query
+      query, page
   );
   if (ok && data) {
     yield put(
-      setSearchedBooks(data.books)
+      setSearchedBooks({cardList: data.books, booksCount: data.total})
     );
   } else {
     console.warn("Error getting search books", problem);
