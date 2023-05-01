@@ -1,11 +1,9 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PagesContainer from "src/pages/PagesContainer";
 import Page404 from "src/pages/Page404";
 import ResetPassword from "src/pages/ResetPassword/ResetPassword";
 import NewPassword from "src/pages/NewPassword/NewPassword";
-import SignIn from "src/components/SingIn";
-import SignUp from "src/components/SignUp";
 import Book from "src/pages/Book";
 import Home from "src/pages/Home";
 import Search from "src/pages/Search";

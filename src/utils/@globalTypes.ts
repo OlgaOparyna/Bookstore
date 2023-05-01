@@ -29,6 +29,9 @@ export type SingleBook = {
     pdf?: { [key: string]: string };
 }
 export type BookListType = SingleBook []
+export type BookProps = {
+    book: SingleBook,
+}
 
 export type BasketCartProps = {
     card: CardType,

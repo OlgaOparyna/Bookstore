@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import {BookListType, CardListType, CardType, SingleBook} from "src/utils/@globalTypes";
+import {
+  BookListType,
+  CardListType,
+  CardType,
+  SingleBook,
+} from "src/utils/@globalTypes";
 import { RootState } from "../store";
-import {GetSearchedBooksPayload} from "src/redux/reducers/@types";
+import { GetSearchedBooksPayload } from "src/redux/reducers/@types";
 import card from "src/components/Card";
 
 type initialType = {
@@ -14,7 +19,7 @@ type initialType = {
   searchedBooksCount: number;
   booksCount: number;
   card: CardType | null;
-  favoritesBooks: CardListType;
+  favoritesBooks: BookListType;
 };
 const initialState: initialType = {
   booksList: [],
@@ -48,17 +53,28 @@ const bookSlice = createSlice({
     setSingleBook: (state, action: PayloadAction<SingleBook>) => {
       state.singleBook = action.payload;
     },
-    getSearchedBooks: (state, action: PayloadAction<GetSearchedBooksPayload >) => {
+    getSearchedBooks: (
+      state,
+      action: PayloadAction<GetSearchedBooksPayload>
+    ) => {
       state.searchValue = action.payload.query;
     },
     setSearchedBooks: (state, action: PayloadAction<CardListType>) => {
       state.searchedBooks = action.payload;
     },
-    setFavoritesBooks: (state, action: PayloadAction<CardType>) => {
-     state.card = action.payload;
-     state.favoritesBooks.push(action.payload);
+    setFavoritesBooks: (state, action: PayloadAction< SingleBook | null>) => {
+      const book = action.payload;
+      const favoritesBooksIndex = state.favoritesBooks.findIndex(
+        (el) => el.isbn13 === book?.isbn13
+      );
+
+      if (favoritesBooksIndex === -1 && book) {
+        state.favoritesBooks.push(book);
+      } else {
+        state.favoritesBooks.splice(favoritesBooksIndex, 1);
+      }
     },
-   setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
+    setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;
     },
   },

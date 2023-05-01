@@ -27,6 +27,7 @@ import MoreDetailse from "src/components/MoreDetailse";
 import EmptyState from "src/components/EmptyState";
 import BookList from "src/components/BookList";
 import { Rate } from 'antd';
+import classNames from "classnames";
 
 const Book = () => {
   const book = useSelector(BookSelectors.getSingleBook);
@@ -34,10 +35,11 @@ const Book = () => {
   const favoritesBooks = useSelector(BookSelectors.getFavoritesBooks);
   const similarBookList = booksList.slice(0, 3);
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
-
+  const [currentValue, setCurrentValue] = useState(book?.rating)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
+
   const { id } = params;
 
   useEffect(() => {
@@ -49,13 +51,12 @@ const Book = () => {
   useEffect(() => {
     dispatch(getAllBooks());
   }, []);
+  const onHeartIconClick = () => {
+    dispatch(setFavoritesBooks(book));
+  };
 
-  // const onAddCartClick = () => {
-  //   dispatch(setSavedBooks(card));
-  //   navigate(RoutesList.Basket)
-  // };
   const favoritesBooksIndex = favoritesBooks.findIndex(
-    (book) => book.isbn13 === book.isbn13
+    (el) => el.isbn13 === book?.isbn13
   );
   const TABS_BOOK_LIST = [
     {
@@ -85,7 +86,6 @@ const Book = () => {
   const onArrowIconClick = () => {
     navigate(RoutesList.Home);
   };
-  const [currentValue, setCurrentValue] = useState(book?.rating)
   return book ? (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
@@ -99,10 +99,8 @@ const Book = () => {
         <div className={styles.rightBlock}>
           <img className={styles.image} src={book?.image} alt={"book image"} />
           <Button
-            title={
-              favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon />
-            }
-            onClick={() => {}}
+            title={favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon/> }
+            onClick={onHeartIconClick}
             buttonClassName={styles.heartIcon}
           />
         </div>
