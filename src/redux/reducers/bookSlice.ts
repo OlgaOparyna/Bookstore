@@ -71,7 +71,6 @@ const bookSlice = createSlice({
       state.searchedBooks = cardList;
       state.searchedBooksCount = booksCount;
     },
-
     setFavoritesBooks: (state, action: PayloadAction<SingleBook | null>) => {
       const book = action.payload;
       const favoritesBooksIndex = state.favoritesBooks.findIndex(

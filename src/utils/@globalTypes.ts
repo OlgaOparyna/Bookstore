@@ -34,6 +34,6 @@ export type BookProps = {
 }
 
 export type BasketCartProps = {
-    card: CardType,
+    book: SingleBook,
     quantity: number;
 }

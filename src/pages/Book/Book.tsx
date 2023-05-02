@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Rate } from 'antd';
+
 import Button from "src/components/Button";
 import {
   ArrowIcon,
@@ -8,31 +12,28 @@ import {
   InstagramIcon,
   TwitterIcon,
 } from "src/assets/icons";
-
-import styles from "./Book.module.scss";
 import Tabs from "src/components/Tabs";
 import { TabsNames } from "src/components/Tabs/types";
 import Title from "src/components/Title";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import Subscribe from "src/components/Subscribe";
+import MoreDetailse from "src/components/MoreDetailse";
+import EmptyState from "src/components/EmptyState";
+import BookList from "src/components/BookList";
+import { RoutesList } from "src/pages/Router";
 import {
   BookSelectors,
   getAllBooks,
   getSingleBook,
   setFavoritesBooks,
 } from "src/redux/reducers/bookSlice";
-import Subscribe from "src/components/Subscribe";
-import { RoutesList } from "src/pages/Router";
-import MoreDetailse from "src/components/MoreDetailse";
-import EmptyState from "src/components/EmptyState";
-import BookList from "src/components/BookList";
-import { Rate } from 'antd';
-import classNames from "classnames";
+import {BasketSelectors, setSavedBooks} from "src/redux/reducers/basketSlice";
+import styles from "./Book.module.scss";
 
 const Book = () => {
   const book = useSelector(BookSelectors.getSingleBook);
   const booksList = useSelector(BookSelectors.getAllBooks);
   const favoritesBooks = useSelector(BookSelectors.getFavoritesBooks);
+  const savedBooks = useSelector(BasketSelectors.getSavedBooks);
   const similarBookList = booksList.slice(0, 3);
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
   const [currentValue, setCurrentValue] = useState(book?.rating)
@@ -41,7 +42,9 @@ const Book = () => {
   const params = useParams();
 
   const { id } = params;
-
+  const favoritesBooksIndex = favoritesBooks.findIndex(
+      (el) => el.isbn13 === book?.isbn13
+  );
   useEffect(() => {
     if (id) {
       dispatch(getSingleBook(id));
@@ -54,10 +57,10 @@ const Book = () => {
   const onHeartIconClick = () => {
     dispatch(setFavoritesBooks(book));
   };
-
-  const favoritesBooksIndex = favoritesBooks.findIndex(
-    (el) => el.isbn13 === book?.isbn13
-  );
+  const onAddToCartButtonClick = () =>{
+    if (book) {
+    dispatch(setSavedBooks({book, quantity:1}));
+    }};
   const TABS_BOOK_LIST = [
     {
       title: "Description",
@@ -84,7 +87,7 @@ const Book = () => {
     setActiveTab(key);
   };
   const onArrowIconClick = () => {
-    navigate(RoutesList.Home);
+    navigate(-1);
   };
   return book ? (
     <div className={styles.container}>
@@ -135,7 +138,7 @@ const Book = () => {
           </div>
           <MoreDetailse />
           <div className={styles.bookButton}>
-            <Button title={"Add to cart"} onClick={() => {}} />
+            <Button title={"Add to cart"} onClick={onAddToCartButtonClick} />
           </div>
           {book.pdf && (
             <a href={value} className={styles.previewBook} target="_blank">

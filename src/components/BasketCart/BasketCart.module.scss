@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   height: 192px;
-  width: 256px;
+  min-width: 256px;
 }
 .blueImageContainer {
   background-color: $blue;
@@ -43,6 +43,7 @@
   justify-content: center;
   align-items: flex-start;
   margin: 0 32px;
+  width: 446px;
 }
 .title {
   font-weight: 700;
@@ -58,7 +59,7 @@
   color: $secondary;
   margin-top: 8px;
 }
-.count {
+.counter {
   display: flex;
   align-items: center;
   justify-content: flex-start;

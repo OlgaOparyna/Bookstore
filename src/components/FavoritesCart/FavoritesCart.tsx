@@ -3,21 +3,25 @@ import classNames from "classnames";
 import {BookProps} from "src/utils/@globalTypes";
 import { HeartRedIcon } from "src/assets/icons";
 import styles from "./FavoritesCart.module.scss";
+import {useNavigate} from "react-router-dom";
 
 const FavoritesCart: FC<BookProps> = ({book} ) => {
-  const { title, subtitle, price, image } = book;
+  const { title, subtitle, isbn13, price, image } = book;
   const priceWithoutDollar: string = price.split("").slice(1).join("");
   const priceNumber = parseInt(priceWithoutDollar);
   const isBlue = priceNumber <= 30;
   const isGreen = priceNumber > 30 && priceNumber <= 40;
   const isPurple = priceNumber > 40 && priceNumber <= 50;
   const isOrange = priceNumber > 50;
-
+  const navigate = useNavigate();
+  const onCardClick = () => {
+    navigate(`/${isbn13}`);
+  };
   return (
-    <div className={styles.container}>
+    <div className={styles.container} >
       <div className={styles.wrapper}>
         <div className={styles.mainInfoContainer}>
-          <div
+          <div onClick={onCardClick}
             className={classNames(styles.imageContainer, {
               [styles.blueImageContainer]: isBlue,
               [styles.greenImageContainer]: isGreen,
@@ -28,7 +32,7 @@ const FavoritesCart: FC<BookProps> = ({book} ) => {
             <img src={image} alt=" " className={styles.image} />
           </div>
           <div className={styles.infoContainer}>
-            <div className={styles.title}>{title}</div>
+            <div onClick={onCardClick} className={styles.title}>{title}</div>
             <div className={styles.subtitle}>{subtitle}</div>
             <div className={styles.price}>
               {price === "$0.00" ? "FREE" : price}
