@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
   BasketCartProps,
-  BookListType,
   SingleBook,
 } from "src/utils/@globalTypes";
 import { RootState } from "src/redux/store";

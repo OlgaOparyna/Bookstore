@@ -19,21 +19,19 @@ import Subscribe from "src/components/Subscribe";
 import MoreDetailse from "src/components/MoreDetailse";
 import EmptyState from "src/components/EmptyState";
 import BookList from "src/components/BookList";
-import { RoutesList } from "src/pages/Router";
 import {
   BookSelectors,
   getAllBooks,
   getSingleBook,
   setFavoritesBooks,
 } from "src/redux/reducers/bookSlice";
-import {BasketSelectors, setSavedBooks} from "src/redux/reducers/basketSlice";
+import {setSavedBooks} from "src/redux/reducers/basketSlice";
 import styles from "./Book.module.scss";
 
 const Book = () => {
   const book = useSelector(BookSelectors.getSingleBook);
   const booksList = useSelector(BookSelectors.getAllBooks);
   const favoritesBooks = useSelector(BookSelectors.getFavoritesBooks);
-  const savedBooks = useSelector(BasketSelectors.getSavedBooks);
   const similarBookList = booksList.slice(0, 3);
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
   const [currentValue, setCurrentValue] = useState(book?.rating)

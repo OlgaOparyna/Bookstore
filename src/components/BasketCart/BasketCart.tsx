@@ -1,12 +1,11 @@
 import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { BasketCartProps } from "src/utils/@globalTypes";
 import { CloseIcon, MinusIcon, PlusIcon } from "src/assets/icons";
-import styles from "./BasketCart.module.scss";
-import { useNavigate } from "react-router-dom";
 import {removeSavedBooks} from "src/redux/reducers/basketSlice";
-import { useDispatch } from "react-redux";
-import book from "src/pages/Book/Book";
+import styles from "./BasketCart.module.scss";
 
 const BasketCart: FC<BasketCartProps> = ({ book }) => {
   const { title, subtitle, isbn13, price, image } = book;
