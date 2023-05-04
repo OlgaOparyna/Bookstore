@@ -83,6 +83,13 @@ const bookSlice = createSlice({
         state.favoritesBooks.splice(favoritesBooksIndex, 1);
       }
     },
+    removeFavoritesCart: (state, action: PayloadAction<SingleBook | null>) => {
+      const book = action.payload;
+      const favoritesBooksIndex = state.favoritesBooks.findIndex(
+          (el) => el.isbn13 === book?.isbn13
+      );
+      state.favoritesBooks.splice(favoritesBooksIndex, 1);
+    },
     setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;
     },
@@ -97,6 +104,7 @@ export const {
   setSearchedBooks,
   setAllBooksLoading,
   setFavoritesBooks,
+  removeFavoritesCart
 } = bookSlice.actions;
 export default bookSlice.reducer;
 export const BookSelectors = {

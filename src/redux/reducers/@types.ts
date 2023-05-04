@@ -9,8 +9,25 @@ export type SetSearchedBooksPayload = {
     booksCount : number
 }
 export type SetUserPayload = {
-    name:  string,
     email: string | null,
     token: string,
     id: string,
 }
+//
+// export type SignInUserPayload = {
+//     email: string;
+//     password: string;
+// };
+// export type SignUpUserPayload = {
+//     username: string;
+//     email: string;
+//     password: string;
+// };
+// export type ResetPasswordPayload = {
+//     email: string;
+// };
+// export type NewPasswordPayload = {
+//     uid: string;
+//     token: string;
+//     new_password: string;
+// };

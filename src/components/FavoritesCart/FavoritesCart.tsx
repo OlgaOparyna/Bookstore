@@ -4,6 +4,9 @@ import {BookProps} from "src/utils/@globalTypes";
 import { HeartRedIcon } from "src/assets/icons";
 import styles from "./FavoritesCart.module.scss";
 import {useNavigate} from "react-router-dom";
+import {removeSavedBooks} from "src/redux/reducers/basketSlice";
+import {useDispatch} from "react-redux";
+import {removeFavoritesCart} from "src/redux/reducers/bookSlice";
 
 const FavoritesCart: FC<BookProps> = ({book} ) => {
   const { title, subtitle, isbn13, price, image } = book;
@@ -16,6 +19,10 @@ const FavoritesCart: FC<BookProps> = ({book} ) => {
   const navigate = useNavigate();
   const onCardClick = () => {
     navigate(`/${isbn13}`);
+  };
+  const dispatch = useDispatch()
+  const onHeartIconClick = () => {
+    dispatch(removeFavoritesCart(book));
   };
   return (
     <div className={styles.container} >
@@ -39,7 +46,7 @@ const FavoritesCart: FC<BookProps> = ({book} ) => {
             </div>
           </div>
         </div>
-        <div className={styles.icon}>
+        <div className={styles.icon} onClick={onHeartIconClick}>
           <HeartRedIcon />
         </div>
       </div>

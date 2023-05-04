@@ -1,20 +1,23 @@
 import React, { useState, KeyboardEvent } from "react";
 import {useNavigate} from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import { RoutesList } from "src/pages/Router";
 import { Bookstore } from "src/assets/logoBookstore";
 import Input from "src/components/Input";
+
 import {
   BasketIcon,
   BasketIconActive,
   HeartIcon,
   HeartIconActive,
   SearchIcon,
-  UserIcon,
+  UserIcon, UserIconActive,
 } from "src/assets/icons";
 import styles from "./Header.module.scss";
-import {getSearchedBooks, setSearchedBooks} from "src/redux/reducers/bookSlice";
+import {BookSelectors, getSearchedBooks} from "src/redux/reducers/bookSlice";
+import {useAuth} from "src/utils/use-auth";
+import {BasketSelectors} from "src/redux/reducers/basketSlice";
 
 const Header = () => {
   const [query, setQuery] = useState("");
@@ -23,25 +26,28 @@ const Header = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isAuth } = useAuth();
   const onLogoClick = () => {
     navigate(RoutesList.Home);
-    setBasketOpened(false);
-    setHeartOpened(false);
   };
+  const favoritesList = useSelector(BookSelectors.getFavoritesBooks);
+  const favoritesIndex = favoritesList.find((book) => book.isbn13);
+  const basketList = useSelector(BasketSelectors.getSavedBooks);
+  const basketIndex = basketList.find((book) => book.book.isbn13);
   const onHeartClick = () => {
     navigate(RoutesList.FavoritesBooks)
     setHeartOpened(true);
-    setBasketOpened(false);
   };
   const onBasketClick = () => {
     navigate(RoutesList.Basket);
     setBasketOpened(true);
-    setHeartOpened(false);
   };
   const onUserClick = () => {
-    navigate(RoutesList.RegistrationForm);
-    setBasketOpened(false);
-    setHeartOpened(false);
+    if (!isAuth) {
+      navigate(RoutesList.RegistrationForm);
+    } else {
+      navigate(RoutesList.Account);
+    }
   };
   const onClickSearchButton = () => {
     dispatch(getSearchedBooks({query, page:1}));
@@ -73,13 +79,13 @@ const Header = () => {
         </div>
         <div className={styles.iconContainer}>
           <div className={styles.icon} onClick={onHeartClick}>
-            {!isHeartOpened ? <HeartIcon /> : <HeartIconActive />}
+            {favoritesIndex ? <HeartIconActive /> : <HeartIcon />}
           </div>
           <div className={styles.icon} onClick={onBasketClick}>
-            {!isBasketOpened ? <BasketIcon /> : <BasketIconActive />}
+            {basketIndex ? <BasketIconActive /> : <BasketIcon />}
           </div>
           <div className={styles.icon} onClick={onUserClick}>
-            <UserIcon />
+            {isAuth ? <UserIconActive/> : <UserIcon/>}
           </div>
         </div>
       </div>
