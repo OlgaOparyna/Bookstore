@@ -8,3 +8,9 @@ export type SetSearchedBooksPayload = {
     cardList: CardListType,
     booksCount : number
 }
+export type SetUserPayload = {
+    name:  string,
+    email: string | null,
+    token: string,
+    id: string,
+}

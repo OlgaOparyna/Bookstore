@@ -6,6 +6,8 @@ import Button from "src/components/Button";
 import styles from "./Account.module.scss";
 import { RoutesList } from "src/pages/Router";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeUser } from "src/redux/reducers/UserSlice";
 
 const Account = () => {
   const [name, setName] = useState("");
@@ -13,6 +15,7 @@ const Account = () => {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const dispatch = useDispatch();
   const onChangeName = (value: string) => {
     setName(value);
   };
@@ -28,16 +31,12 @@ const Account = () => {
   const onChangeConfirmPassword = (value: string) => {
     setConfirmPassword(value);
   };
-  const onButtonCancelClick = () => {
-    setName("");
-    setEmail("");
-    setPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
+  const onButtonLogOutClick = () => {
+    dispatch(removeUser(email));
   };
   const navigate = useNavigate();
   const onArrowIconClick = () => {
-    navigate(RoutesList.Home);
+    navigate(-1);
   };
   return (
     <div className={styles.container}>
@@ -99,8 +98,8 @@ const Account = () => {
           buttonClassName={styles.button}
         />
         <Button
-          title="Cancel"
-          onClick={onButtonCancelClick}
+          title="Log out"
+          onClick={onButtonLogOutClick}
           buttonClassName={styles.buttonWhite}
         />
       </div>
