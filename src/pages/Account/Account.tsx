@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ArrowIcon } from "src/assets/icons";
 import Title from "src/components/Title";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
-import styles from "./Account.module.scss";
 import { RoutesList } from "src/pages/Router";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { removeUser } from "src/redux/reducers/UserSlice";
+import {removeAllSavedBooks} from "src/redux/reducers/basketSlice";
+import {removeAllFavoritesCart} from "src/redux/reducers/bookSlice";
+import styles from "./Account.module.scss";
 
 const Account = () => {
   const [name, setName] = useState("");
@@ -33,6 +35,9 @@ const Account = () => {
   };
   const onButtonLogOutClick = () => {
     dispatch(removeUser(email));
+    dispatch(removeAllSavedBooks())
+    dispatch(removeAllFavoritesCart())
+    navigate(RoutesList.RegistrationForm)
   };
   const navigate = useNavigate();
   const onArrowIconClick = () => {

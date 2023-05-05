@@ -19,35 +19,35 @@ const basketSlice = createSlice({
   reducers: {
     setSavedBooks: (state, action: PayloadAction<BasketCartProps>) => {
       const book = action.payload;
-      const savedBooks = state.savedBooks.find(
+      const newSavedBooks = state.savedBooks.find(
         (el) => el.book.isbn13 === book?.book.isbn13
       );
-      if (savedBooks && savedBooks.quantity) {
-        savedBooks.quantity++;
+      if (newSavedBooks && newSavedBooks.quantity) {
+        newSavedBooks.quantity++;
+        newSavedBooks.book.price.substring(1)
       } else {
         state.savedBooks.push({ ...book, quantity: 1 });
       }
     },
-    // incrementQuantity: (state, action: PayloadAction<BasketCartProps>) => {
-    //     const book = action.payload;
-    //    const newSavedBooks = state.savedBooks.find((item) => item.book.isbn13 === book.book?.isbn13);
-    //   if (newSavedBooks && newSavedBooks.quantity) {
-    //     {newSavedBooks.quantity++;
-    //   }}
-    // },
-    // decrementQuantity: (state, action: PayloadAction<BasketCartProps>) => {
-    //   const book = action.payload;
-    //   const newSavedBooks  = state.savedBooks.find((item) => item.book.isbn13 === book.book?.isbn13);
-    //   if (newSavedBooks && newSavedBooks.quantity) {
-    //       newSavedBooks .quantity--
-    //     } else if (newSavedBooks?.quantity === 0){
-    //     const book = action.payload;
-    //     const savedBooksIndex = state.savedBooks.findIndex(
-    //         (item) => item.book.isbn13 === book.book?.isbn13
-    //     );
-    //     state.savedBooks.splice(savedBooksIndex, 1);
-    //     }
-    // },
+    incrementQuantity: (state, action: PayloadAction<BasketCartProps>) => {
+        const book = action.payload;
+       const newSavedBooks = state.savedBooks.find((item) => item.book.isbn13 === book.book?.isbn13);
+      if (newSavedBooks && newSavedBooks.quantity) {
+        {newSavedBooks.quantity++;
+      }}
+    },
+    decrementQuantity: (state, action: PayloadAction<BasketCartProps>) => {
+      const book = action.payload;
+      const newSavedBooks  = state.savedBooks.find((item) => item.book.isbn13 === book.book?.isbn13);
+      if (newSavedBooks && newSavedBooks.quantity) {
+          newSavedBooks.quantity--
+        } else if (newSavedBooks?.quantity === 0){
+        const savedBooksIndex = state.savedBooks.findIndex(
+            (item) => item.book.isbn13 === book.book?.isbn13
+        );
+        state.savedBooks.splice(savedBooksIndex, 1);
+        }
+    },
     removeSavedBooks: (state, action: PayloadAction<SingleBook | null>) => {
       const book = action.payload;
       const savedBooksIndex = state.savedBooks.findIndex(
@@ -55,13 +55,17 @@ const basketSlice = createSlice({
       );
       state.savedBooks.splice(savedBooksIndex, 1);
     },
+    removeAllSavedBooks: (state) => {
+      state.savedBooks = initialState.savedBooks
+    }
   },
 });
 
 export const { setSavedBooks,
-  // incrementQuantity,
-  // decrementQuantity,
-  removeSavedBooks } = basketSlice.actions;
+  incrementQuantity,
+  decrementQuantity,
+  removeSavedBooks,
+  removeAllSavedBooks} = basketSlice.actions;
 export default basketSlice.reducer;
 export const BasketSelectors = {
   getSavedBooks: (state: RootState) => state.basket.savedBooks,

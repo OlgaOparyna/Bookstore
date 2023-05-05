@@ -35,8 +35,8 @@ const FavotitesBooks = () => {
         </div>
       ) : (
         <EmptyState
-          title="Sorry, there's no Books"
-          description="Try to check out another category"
+          title="Sorry, there's no books"
+          description="Try to add some books"
         />
       )}
       <BookList title="Popular Books" cardsList={popularBookList} />

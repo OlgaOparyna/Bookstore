@@ -26,6 +26,7 @@ import {
   setFavoritesBooks,
 } from "src/redux/reducers/bookSlice";
 import {setSavedBooks} from "src/redux/reducers/basketSlice";
+import {useAuth} from "src/utils/use-auth";
 import styles from "./Book.module.scss";
 
 const Book = () => {
@@ -37,6 +38,7 @@ const Book = () => {
   const [currentValue, setCurrentValue] = useState(book?.rating)
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isAuth } = useAuth();
   const params = useParams();
 
   const { id } = params;
@@ -103,6 +105,7 @@ const Book = () => {
             title={favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon/> }
             onClick={onHeartIconClick}
             buttonClassName={styles.heartIcon}
+            disabled={!isAuth}
           />
         </div>
 
@@ -136,7 +139,7 @@ const Book = () => {
           </div>
           <MoreDetailse />
           <div className={styles.bookButton}>
-            <Button title={"Add to cart"} onClick={onAddToCartButtonClick} />
+            <Button title={"Add to cart"} onClick={onAddToCartButtonClick} disabled={!isAuth}/>
           </div>
           {book.pdf && (
             <a href={value} className={styles.previewBook} target="_blank">

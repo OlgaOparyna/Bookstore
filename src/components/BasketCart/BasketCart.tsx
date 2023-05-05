@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { BasketCartProps } from "src/utils/@globalTypes";
 import { CloseIcon, MinusIcon, PlusIcon } from "src/assets/icons";
-import {removeSavedBooks} from "src/redux/reducers/basketSlice";
+import {decrementQuantity, incrementQuantity, removeSavedBooks} from "src/redux/reducers/basketSlice";
 import styles from "./BasketCart.module.scss";
 
-const BasketCart: FC<BasketCartProps> = ({ book }) => {
+const BasketCart: FC<BasketCartProps> = ({ book, quantity }) => {
   const { title, subtitle, isbn13, price, image } = book;
   const priceWithoutDollar: string = price.split("").slice(1).join("");
   const priceNumber = +priceWithoutDollar;
@@ -17,31 +17,26 @@ const BasketCart: FC<BasketCartProps> = ({ book }) => {
   const isOrange = priceNumber > 50;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [basketPrice, setBasketPrice] = useState(priceNumber);
   const onCardClick = () => {
     navigate(`/${isbn13}`);
   };
-  const onCloseIconClick = () => {
-    dispatch(removeSavedBooks(book));
-  };
-  const [quantity, setQuantity] = useState(1);
-  const [basketPrice, setBasketPrice] = useState(priceNumber);
-
   const onPlusIconClick = () =>{
     if (book) {
-      //dispatch(incrementQuantity({book, quantity:1}))
+      dispatch(incrementQuantity({book, quantity:1}))
       setBasketPrice(priceNumber * (quantity+1))
-      setQuantity(quantity + 1);
     }}
   const onMinusIconClick = () =>{
     if (book && quantity > 1) {
-      //dispatch(decrementQuantity({book, quantity:1}))
+      dispatch(decrementQuantity({book, quantity:1}))
       setBasketPrice(priceNumber * (quantity-1))
-      setQuantity(quantity - 1);
     } else{
       dispatch(removeSavedBooks(book));
     }
   }
-
+  const onCloseIconClick = () => {
+    dispatch(removeSavedBooks(book));
+  };
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

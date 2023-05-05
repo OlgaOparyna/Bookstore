@@ -90,6 +90,9 @@ const bookSlice = createSlice({
       );
       state.favoritesBooks.splice(favoritesBooksIndex, 1);
     },
+    removeAllFavoritesCart: (state) => {
+      state.favoritesBooks = initialState.favoritesBooks
+    },
     setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;
     },
@@ -104,7 +107,8 @@ export const {
   setSearchedBooks,
   setAllBooksLoading,
   setFavoritesBooks,
-  removeFavoritesCart
+  removeFavoritesCart,
+  removeAllFavoritesCart
 } = bookSlice.actions;
 export default bookSlice.reducer;
 export const BookSelectors = {

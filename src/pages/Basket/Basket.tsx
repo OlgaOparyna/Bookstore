@@ -1,31 +1,31 @@
-import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ArrowIcon } from "src/assets/icons";
 import Title from "src/components/Title";
-import { BasketSelectors } from "src/redux/reducers/basketSlice";
+import {BasketSelectors, removeAllSavedBooks} from "src/redux/reducers/basketSlice";
 import Button from "src/components/Button";
 import EmptyState from "src/components/EmptyState";
 import BasketCart from "src/components/BasketCart";
 import styles from "./Basket.module.scss";
-import { BasketCartProps } from "src/utils/@globalTypes";
-import book from "src/pages/Book";
 
 const Basket = () => {
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+
   const basketList = useSelector(BasketSelectors.getSavedBooks);
+  const totalQuantity = basketList
+      ?.map(item => +item.book?.price.split("").slice(1).join("") * item?.quantity)
+      .reduce((sum, book) => sum + book, 0);
+  const vat = (totalQuantity / 120) * 20;
+  const sumTotal = totalQuantity - vat;
   const onArrowIconClick = () => {
     navigate(-1);
   };
-  const onCheckOutButtonClick = () => {};
-  const totalQuantity = basketList.reduce((sum, book) => {
-    const priceWithoutDollar = book.book?.price.split("").slice(1).join("");
-    const priceNumber = +priceWithoutDollar;
-    return sum + priceNumber * quantity;
-  }, 0);
-  const vat = (totalQuantity / 120) * 20;
-  const sumTotal = totalQuantity - vat;
+  const onRemoveAllButtonClick = () => {
+    dispatch(removeAllSavedBooks());
+
+  };
   return (
     <div className={styles.container}>
       <div className={styles.arrowIcon} onClick={onArrowIconClick}>
@@ -41,15 +41,15 @@ const Basket = () => {
               <BasketCart
                 key={item.book.isbn13}
                 book={item.book}
-                quantity={quantity}
+                quantity={item.quantity}
               />
             );
           })}
         </div>
       ) : (
         <EmptyState
-          title="Sorry, there's no Books"
-          description="Try to check out another category"
+          title="Sorry, there's no books"
+          description="Try to add some books"
         />
       )}
       <div className={styles.sumBlock}>
@@ -67,7 +67,7 @@ const Basket = () => {
           <div className={styles.total}>Total: </div>
           <div className={styles.total}>${totalQuantity.toFixed(2)}</div>
         </div>
-        <Button title="Check out" onClick={onCheckOutButtonClick} />
+        <Button title="Remove All" onClick={onRemoveAllButtonClick} />
       </div>
     </div>
   );
