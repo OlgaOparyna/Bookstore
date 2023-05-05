@@ -17,7 +17,6 @@ const Card: FC<CardProps> = ({ card }) => {
     navigate(`/${isbn13}`);
   };
   return (
-
     <div className={styles.container} onClick={onCardClick}>
       <div
         className={classNames(styles.imageContainer, {

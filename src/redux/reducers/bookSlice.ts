@@ -11,7 +11,6 @@ import {
   GetSearchedBooksPayload,
   SetSearchedBooksPayload,
 } from "src/redux/reducers/@types";
-import card from "src/components/Card";
 
 type initialType = {
   booksList: CardListType;
@@ -44,14 +43,6 @@ const bookSlice = createSlice({
     setAllBooks: (state, action: PayloadAction<CardListType>) => {
       state.booksList = action.payload;
     },
-    // getAllBooks: (_, __: PayloadAction<GetAllBooksPayload>) => {},
-    // setAllBooks: (
-    //     state,
-    //     { payload: { BooksCount, cardList } }: PayloadAction<SetAllBooksPayload>
-    // ) => {
-    //     state.BooksList = cardList;
-    //     state.BooksCount = BooksCount;
-    // },
     getSingleBook: (_, __: PayloadAction<string>) => {},
     setSingleBook: (state, action: PayloadAction<SingleBook>) => {
       state.singleBook = action.payload;

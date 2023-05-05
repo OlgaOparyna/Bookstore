@@ -7,6 +7,7 @@ import Button from "src/components/Button";
 import { RoutesList } from "src/pages/Router";
 
 import styles from "./ResetPassword.module.scss";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -15,12 +16,20 @@ const ResetPassword = () => {
   const onChangeEmail = (value: string) => {
     setEmail(value);
   };
-  const onSubmit = () => {
-    if (isSubmitted) {
-      navigate(RoutesList.Home);
-    } else {
-      setSubmitted(true);
-    }
+  const auth = getAuth();
+  const onSubmit = (email: string) => () => {
+    sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:3000/auth",
+    })
+      .then(() => {
+        setSubmitted(true);
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  };
+  const onNewPasswordPage = () => {
+    navigate(RoutesList.NewPassword);
   };
   return (
     <div className={styles.container}>
@@ -43,9 +52,12 @@ const ResetPassword = () => {
             disabled={isSubmitted}
           />
           <div className={styles.button}>
-            <Button title={"Reset"} onClick={onSubmit} />
+            {!isSubmitted ? (
+              <Button title="Reset" onClick={onSubmit(email)} />
+            ) : (
+              <Button title="Confirm" onClick={onNewPasswordPage} />
+            )}
           </div>
-        {/* TODO кнопка при submit  */}
         </div>
       </div>
     </div>
