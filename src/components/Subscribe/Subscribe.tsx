@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Subtitle from "src/components/Subtitle";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
 import styles from "./Subscribe.module.scss";
@@ -9,6 +8,10 @@ const Subscribe = () => {
   const onChangeEmail = (value: string) => {
     setEmail(value);
   };
+  const onSubscribeButtonClick = () => {
+   window.location.href ='mailto:example@email.com'
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -26,7 +29,7 @@ const Subscribe = () => {
           />
           <Button
             title="Subscribe"
-            onClick={() => {}}
+            onClick={onSubscribeButtonClick}
             buttonClassName={styles.button}
           />
         </div>

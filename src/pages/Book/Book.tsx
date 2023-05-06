@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Rate } from 'antd';
+import { Rate } from "antd";
 
 import Button from "src/components/Button";
 import {
@@ -10,13 +10,13 @@ import {
   HeartIcon,
   HeartRedIcon,
   InstagramIcon,
+  MoreDetailseIcon,
   TwitterIcon,
 } from "src/assets/icons";
 import Tabs from "src/components/Tabs";
 import { TabsNames } from "src/components/Tabs/types";
 import Title from "src/components/Title";
 import Subscribe from "src/components/Subscribe";
-import MoreDetailse from "src/components/MoreDetailse";
 import EmptyState from "src/components/EmptyState";
 import BookList from "src/components/BookList";
 import {
@@ -25,8 +25,8 @@ import {
   getSingleBook,
   setFavoritesBooks,
 } from "src/redux/reducers/bookSlice";
-import {setSavedBooks} from "src/redux/reducers/basketSlice";
-import {useAuth} from "src/utils/use-auth";
+import { setSavedBooks } from "src/redux/reducers/basketSlice";
+import { useAuth } from "src/utils/use-auth";
 import styles from "./Book.module.scss";
 
 const Book = () => {
@@ -35,7 +35,9 @@ const Book = () => {
   const favoritesBooks = useSelector(BookSelectors.getFavoritesBooks);
   const similarBookList = booksList.slice(0, 3);
   const [activeTab, setActiveTab] = useState(TabsNames.Description);
-  const [currentValue, setCurrentValue] = useState(book?.rating)
+  const [currentValue, setCurrentValue] = useState(book?.rating);
+  const [showDetails, setShowDetails] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuth } = useAuth();
@@ -43,7 +45,7 @@ const Book = () => {
 
   const { id } = params;
   const favoritesBooksIndex = favoritesBooks.findIndex(
-      (el) => el.isbn13 === book?.isbn13
+    (el) => el.isbn13 === book?.isbn13
   );
   useEffect(() => {
     if (id) {
@@ -57,10 +59,14 @@ const Book = () => {
   const onHeartIconClick = () => {
     dispatch(setFavoritesBooks(book));
   };
-  const onAddToCartButtonClick = () =>{
+  const onButtonClick = () => {
+    setShowDetails(!showDetails);
+  };
+  const onAddToCartButtonClick = () => {
     if (book) {
-    dispatch(setSavedBooks({book, quantity:1}));
-    }};
+      dispatch(setSavedBooks({ book, quantity: 1 }));
+    }
+  };
   const TABS_BOOK_LIST = [
     {
       title: "Description",
@@ -102,7 +108,9 @@ const Book = () => {
         <div className={styles.rightBlock}>
           <img className={styles.image} src={book?.image} alt={"book image"} />
           <Button
-            title={favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon/> }
+            title={
+              favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon />
+            }
             onClick={onHeartIconClick}
             buttonClassName={styles.heartIcon}
             disabled={!isAuth}
@@ -115,10 +123,13 @@ const Book = () => {
               {book?.price === "$0.00" ? "FREE" : book?.price}
             </div>
             <div className={styles.rating}>
-              <Rate onChange={(value) => {
-                setCurrentValue(value)
-              }} value={currentValue}
-                    className={styles.rate}/>
+              <Rate
+                onChange={(value) => {
+                  setCurrentValue(value);
+                }}
+                value={currentValue}
+                className={styles.rate}
+              />
             </div>
           </div>
           <div className={styles.leftBlockInfo}>
@@ -137,9 +148,34 @@ const Book = () => {
             <div className={styles.text}>Format</div>
             <div className={styles.textBook}>Paper book / ebook (PDF)</div>
           </div>
-          <MoreDetailse />
+          {showDetails && (
+            <div>
+              <div className={styles.leftBlockInfo}>
+                <div className={styles.text}>Pages</div>
+                <div className={styles.textBook}>{book?.pages}</div>
+              </div>
+              <div className={styles.leftBlockInfo}>
+                <div className={styles.text}>Isbn13</div>
+                <div className={styles.textBook}>{book?.isbn13}</div>
+              </div>
+              <div className={styles.leftBlockInfo}>
+                <div className={styles.text}>Isbn10</div>
+                <div className={styles.textBook}>{book?.isbn10}</div>
+              </div>
+            </div>
+          )}
+          <div className={styles.moreDitailse}>
+            <div className={styles.textBook} onClick={onButtonClick}>
+              More detailse
+            </div>
+            <MoreDetailseIcon />
+          </div>
           <div className={styles.bookButton}>
-            <Button title={"Add to cart"} onClick={onAddToCartButtonClick} disabled={!isAuth}/>
+            <Button
+              title={"Add to cart"}
+              onClick={onAddToCartButtonClick}
+              disabled={!isAuth}
+            />
           </div>
           {book.pdf && (
             <a href={value} className={styles.previewBook} target="_blank">
@@ -148,7 +184,6 @@ const Book = () => {
           )}
         </div>
       </div>
-
       <div className={styles.centerBlock}>
         <Tabs
           tabsListArray={TABS_BOOK_LIST}

@@ -8,6 +8,7 @@ type ButtonProps = {
   onClick: () => void;
   disabled?: boolean;
   buttonClassName?: string;
+  mailto?: string;
 };
 const Button: FC<ButtonProps> = ({
   title,

@@ -68,15 +68,32 @@
   font-size: 16px;
   line-height: 32px;
   color: $secondary;
+  margin-right: 50px;
 }
 .textBook{
   font-weight: 400;
   font-size: 16px;
   line-height: 32px;
   color: $primary;
+  text-align: right;
 }
 .bookButton{
   margin: 59px 0 40px;
+}
+.moreDitailse{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+.text{
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
 .previewBook{
   font-weight: 400;
