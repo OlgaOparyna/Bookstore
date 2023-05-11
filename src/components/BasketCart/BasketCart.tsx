@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { BasketCartProps } from "src/utils/@globalTypes";
-import { CloseIcon, MinusIcon, PlusIcon } from "src/assets/icons";
+import { CloseIconModal, MinusIcon, PlusIcon } from "src/assets/icons";
 import {decrementQuantity, incrementQuantity, removeSavedBooks} from "src/redux/reducers/basketSlice";
 import styles from "./BasketCart.module.scss";
 
@@ -70,7 +70,7 @@ const BasketCart: FC<BasketCartProps> = ({ book, quantity }) => {
         </div>
         <div className={styles.price}>{price === "$0.00" ? "FREE" : "$" + basketPrice.toFixed(2)}</div>
         <div onClick={onCloseIconClick}>
-          <CloseIcon />
+          <CloseIconModal />
         </div>
       </div>
     </div>

@@ -28,6 +28,7 @@ import {
 import { setSavedBooks } from "src/redux/reducers/basketSlice";
 import { useAuth } from "src/utils/use-auth";
 import styles from "./Book.module.scss";
+import Modal from "src/components/Modal";
 
 const Book = () => {
   const book = useSelector(BookSelectors.getSingleBook);
@@ -66,6 +67,7 @@ const Book = () => {
     if (book) {
       dispatch(setSavedBooks({ book, quantity: 1 }));
     }
+    <Modal isVisible={true} onClose={()=>{}} children={"Cart is add"}/>
   };
   const TABS_BOOK_LIST = [
     {
@@ -106,7 +108,7 @@ const Book = () => {
 
       <div className={styles.infoContainer}>
         <div className={styles.rightBlock}>
-          <img className={styles.image} src={book?.image} alt={"book image"} />
+          <img className={styles.image} src={book?.image} alt={"book image"}/>
           <Button
             title={
               favoritesBooksIndex === -1 ? <HeartIcon /> : <HeartRedIcon />

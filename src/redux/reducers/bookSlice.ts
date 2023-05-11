@@ -22,6 +22,7 @@ type initialType = {
   booksCount: number;
   card: CardType | null;
   favoritesBooks: BookListType;
+  isVisibleSelectedModal: boolean;
 };
 const initialState: initialType = {
   booksList: [],
@@ -33,6 +34,7 @@ const initialState: initialType = {
   booksCount: 0,
   card: null,
   favoritesBooks: [],
+  isVisibleSelectedModal: false,
 };
 
 const bookSlice = createSlice({
@@ -87,6 +89,9 @@ const bookSlice = createSlice({
     setAllBooksLoading: (state, action: PayloadAction<boolean>) => {
       state.isAllBooksLoading = action.payload;
     },
+    setBookVisibility: (state, action: PayloadAction<boolean>) => {
+      state.isVisibleSelectedModal = action.payload;
+    },
   },
 });
 export const {
@@ -99,7 +104,8 @@ export const {
   setAllBooksLoading,
   setFavoritesBooks,
   removeFavoritesCart,
-  removeAllFavoritesCart
+  removeAllFavoritesCart,
+  setBookVisibility,
 } = bookSlice.actions;
 export default bookSlice.reducer;
 export const BookSelectors = {
@@ -110,4 +116,6 @@ export const BookSelectors = {
   getSearchValue: (state: RootState) => state.book.searchValue,
   getSearchedBooksCount: (state: RootState) => state.book.searchedBooksCount,
   getFavoritesBooks: (state: RootState) => state.book.favoritesBooks,
+  getVisibleSelectedModal: (state: RootState) =>
+      state.book.isVisibleSelectedModal,
 };

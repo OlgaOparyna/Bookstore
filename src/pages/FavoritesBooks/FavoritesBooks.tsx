@@ -9,6 +9,7 @@ import Title from "src/components/Title";
 import BookList from "src/components/BookList";
 import EmptyState from "src/components/EmptyState";
 import FavoritesCart from "src/components/FavoritesCart";
+import {useAuth} from "src/utils/use-auth";
 
 const FavotitesBooks = () => {
   const navigate = useNavigate();

@@ -9,6 +9,7 @@
   &:hover {
     cursor: pointer;
     color: $primary-secondary;
+    transform: scale(1.1);
   }
 }
 .imageContainer {

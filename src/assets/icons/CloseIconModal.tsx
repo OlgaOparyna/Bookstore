@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CloseIcon = ({
+export const CloseIconModal = ({
   width = "56",
   height = "56",
   fill = "#313037",

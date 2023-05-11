@@ -1,6 +1,6 @@
 import React, { useState, KeyboardEvent } from "react";
-import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import { RoutesList } from "src/pages/Router";
 import { Bookstore } from "src/assets/logoBookstore";
@@ -12,12 +12,16 @@ import {
   HeartIcon,
   HeartIconActive,
   SearchIcon,
-  UserIcon, UserIconActive,
+  UserIcon,
+  UserIconActive,
 } from "src/assets/icons";
 import styles from "./Header.module.scss";
-import {BookSelectors, getSearchedBooks} from "src/redux/reducers/bookSlice";
-import {useAuth} from "src/utils/use-auth";
-import {BasketSelectors} from "src/redux/reducers/basketSlice";
+import {
+  BookSelectors,
+  getSearchedBooks,
+} from "src/redux/reducers/bookSlice";
+import { useAuth } from "src/utils/use-auth";
+import { BasketSelectors } from "src/redux/reducers/basketSlice";
 
 const Header = () => {
   const [query, setQuery] = useState("");
@@ -35,7 +39,7 @@ const Header = () => {
   const basketList = useSelector(BasketSelectors.getSavedBooks);
   const basketIndex = basketList.find((book) => book.book.isbn13);
   const onHeartClick = () => {
-    navigate(RoutesList.FavoritesBooks)
+    navigate(RoutesList.FavoritesBooks);
     setHeartOpened(true);
   };
   const onBasketClick = () => {
@@ -50,7 +54,7 @@ const Header = () => {
     }
   };
   const onClickSearchButton = () => {
-    dispatch(getSearchedBooks({query, page:1}));
+    dispatch(getSearchedBooks({ query, page: 1 }));
     setQuery("");
     navigate(`/search/${query}`);
   };
@@ -85,7 +89,7 @@ const Header = () => {
             {basketIndex ? <BasketIconActive /> : <BasketIcon />}
           </div>
           <div className={styles.icon} onClick={onUserClick}>
-            {isAuth ? <UserIconActive/> : <UserIcon/>}
+            {isAuth ? <UserIconActive /> : <UserIcon />}
           </div>
         </div>
       </div>

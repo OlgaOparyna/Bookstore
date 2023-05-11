@@ -19,7 +19,8 @@
   align-items: center;
   &:hover {
     cursor: pointer;
-  }
+    transform: scale(1.1);
+    }
 }
 .searchContainer {
   display: flex;
@@ -47,12 +48,14 @@
   right: 0;
   &:hover {
     cursor: pointer;
+    transform: scale(1.2);
   }
 }
 .iconContainer {
   display: flex;
   div:hover {
     cursor: pointer;
+    transform: scale(1.2);
     svg > path {
       fill: $gray;
     }

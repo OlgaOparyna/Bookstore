@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
 import styles from "./Subscribe.module.scss";
@@ -9,9 +9,8 @@ const Subscribe = () => {
     setEmail(value);
   };
   const onSubscribeButtonClick = () => {
-   window.location.href ='mailto:example@email.com'
+    window.location.href ='mailto:example@email.com'
   };
-
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>

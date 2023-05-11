@@ -8,6 +8,7 @@ import Button from "src/components/Button";
 import EmptyState from "src/components/EmptyState";
 import BasketCart from "src/components/BasketCart";
 import styles from "./Basket.module.scss";
+import {useAuth} from "src/utils/use-auth";
 
 const Basket = () => {
   const navigate = useNavigate();
